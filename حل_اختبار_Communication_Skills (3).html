@@ -877,21 +877,51 @@
    ومُعرّف العنصر اللي يتحدد (highlight) وقت الكلام عنه
    ============================================================ */
 
+const TONE_PROSODY = {
+  excited:    { rate: 1.0,  pitch: 1.05 },
+  question:   { rate: 0.95, pitch: 1.0  },
+  explain:    { rate: 0.92, pitch: 0.97 },
+  answer:     { rate: 0.88, pitch: 0.95 },
+  transition: { rate: 1.05, pitch: 1.0  }
+};
+
+const EXCITED_PATTERN = /[!！]|(?:^|\s)(يلا|تعالي|شوفي|وقفة)/;
+
+function clampRate(rate){
+  return Math.min(1.05, Math.max(0.85, rate));
+}
+
+function detectTone(step){
+  if(step.tone && TONE_PROSODY[step.tone]) return step.tone;
+  const text = (step.text || '').trim();
+  if(/[؟?]$/.test(text)) return 'question';
+  if(step.cls && step.cls.includes('correct')) return 'answer';
+  if(text.length < 25) return 'transition';
+  if(EXCITED_PATTERN.test(text)) return 'excited';
+  return 'explain';
+}
+
+function getSpeechProsody(step){
+  const tone = detectTone(step);
+  const { rate, pitch } = TONE_PROSODY[tone];
+  return { tone, rate: clampRate(rate), pitch };
+}
+
 const narrations = {
 
   q1: [
-    { id:'q1-step-0', lang:'ar-SA', cls:'lang-ar', text:"يلا نبدأ! هذا خبر من رويترز عن شركة جي باور اليابانية. بصراحة ما يهمنا نقرا كل سطر، إحنا محققين، نبحث عن أفضل تلخيص." },
+    { id:'q1-step-0', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"يلا نبدأ! هذا خبر من رويترز عن شركة جي باور اليابانية. بصراحة ما يهمنا نقرا كل سطر، إحنا محققين، نبحث عن أفضل تلخيص." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"خليني أعطيك السر: ركزي بس على ثلاث أسئلة. مين الشركة؟ وش سوّت؟ وليش سوّت كذا؟ هذا كافي تمامًا." },
-    { id:'q1-step-1', lang:'ar-SA', cls:'lang-ar', text:"تعالي نشوف الخيار أ. يقول إن الشركة بتتعاون مع شركاء أوروبيين وعرب." },
-    { id:null, lang:'ar-SA', cls:'lang-ar', text:"وقفة! هذي المعلومة مو موجودة بالنص الأصلي خالص! يعني إحنا أمام خيار مختلق، شيليه من القائمة فورًا." },
-    { id:'q1-step-2', lang:'ar-SA', cls:'lang-ar', text:"طيب خل ننتقل للخيار ب." },
+    { id:'q1-step-1', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"تعالي نشوف الخيار أ. يقول إن الشركة بتتعاون مع شركاء أوروبيين وعرب." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"وقفة! هذي المعلومة مو موجودة بالنص الأصلي خالص! يعني إحنا أمام خيار مختلق، شيليه من القائمة فورًا." },
+    { id:'q1-step-2', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"طيب خل ننتقل للخيار ب." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذا الخيار، يا حلو، نسخ جمل كاملة من النص الأصلي حرف بحرف! وهذا نسخ ولصق مو تلخيص، فهو مستبعد كذلك." },
-    { id:'q1-step-3', lang:'ar-SA', cls:'lang-ar', text:"وعندنا الخيار د." },
+    { id:'q1-step-3', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"وعندنا الخيار د." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذا كتب اسم الكاتبة كامل داخل الجملة، وهذا أسلوب الصحف، مو توثيق آيبيايه أكاديمي زي ما نتعلمه بالجامعة. فهو مستبعد أيضًا." },
-    { id:'q1-step-4', lang:'ar-SA', cls:'lang-ar', text:"وبكذا، ما بقى إلا الخيار سي!" },
+    { id:'q1-step-4', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"وبكذا، ما بقى إلا الخيار سي!" },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"وفعلًا هذا أحسنهم. صياغة جديدة، يغطي كل الأفكار المهمة، وما زاد ولا نقص شي، وختمها بتوثيق آيبيايه صحيح بالضبط." },
-    { id:'q1-step-6', lang:'ar-SA', cls:'lang-ar correct', text:"وهكذا، الإجابة الصحيحة هي الخيار سي. سهلة صح؟" },
-    { id:'q1-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"وخلاصة السبب: لأنه الوحيد اللي يعيد صياغة الفكرة بكلمات جديدة، يحافظ على كل المعلومات الصحيحة، وما يضيف أي حاجة غريبة، وفيه توثيق سليم. وخلصنا أول سؤال!" }
+    { id:'q1-step-6', lang:'ar-SA', cls:'lang-ar correct', tone:'answer', text:"وهكذا، الإجابة الصحيحة هي الخيار سي. سهلة صح؟" },
+    { id:'q1-step-7', lang:'ar-SA', cls:'lang-ar correct', tone:'answer', text:"وخلاصة السبب: لأنه الوحيد اللي يعيد صياغة الفكرة بكلمات جديدة، يحافظ على كل المعلومات الصحيحة، وما يضيف أي حاجة غريبة، وفيه توثيق سليم. وخلصنا أول سؤال!" }
   ],
 
   q2: [
@@ -899,29 +929,29 @@ const narrations = {
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"السر هو: ما تقرين النص كأنه قصة، اقريه كأنه أربع صناديق، وكل صندوق فيه فكرة وحدة بس." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"الصندوق الأول عن تجربة شركة ستار كاتشر. الثاني والثالث عن مميزات الألواح الشمسية بالفضاء، إنها تجمع الضوء أحسن. والرابع عن التحديات والتكلفة." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"اكتبي جملة وحدة بسيطة لكل صندوق، وربطيهم بكلمات زي هاوإيفر ومعناها لكن، وخلاص! تلخيص جاهز بدون لخبطة." },
-    { id:'q2-step-2', lang:'ar-SA', cls:'lang-ar correct', text:"وهذا التلخيص النموذجي. جمع الطاقة الشمسية بالفضاء وإرسالها للأرض صار قريب من الواقع، بعد إنه كان فكرة نظرية بس. شركة ستار كاتشر جربت هذا، ونقلت طاقة بقدرة مئة واط لمسافة مئة وخمسة أمتار، باستخدام عدسات كبيرة بملعب فلوريدا. والألواح الشمسية بالفضاء تجمع ضوء الشمس باستمرار، بعكس الألواح الأرضية، وتعطي كثافة طاقة أعلى بعشر مرات تقريبًا. لكن، فيه تحديات كبيرة، منها التكلفة العالية، وتعقيد بناء الأقمار الصناعية، ومنافسة مصادر الطاقة المتجددة الأرضية الأرخص والأسرع." },
-    { id:'q2-step-3', lang:'ar-SA', cls:'lang-ar correct', text:"شوفي معاي، هذا التلخيص بكلمات جديدة بالكامل، عدد كلماته ستة وثمانين كلمة بالضبط، يعني بالضبط ضمن حد التسعين كلمة المطلوب، وفيه توثيق صحيح بالنهاية. تلخيص يستاهل علامة كاملة!" }
+    { id:'q2-step-2', lang:'ar-SA', cls:'lang-ar correct', tone:'answer', text:"وهذا التلخيص النموذجي. جمع الطاقة الشمسية بالفضاء وإرسالها للأرض صار قريب من الواقع، بعد إنه كان فكرة نظرية بس. شركة ستار كاتشر جربت هذا، ونقلت طاقة بقدرة مئة واط لمسافة مئة وخمسة أمتار، باستخدام عدسات كبيرة بملعب فلوريدا. والألواح الشمسية بالفضاء تجمع ضوء الشمس باستمرار، بعكس الألواح الأرضية، وتعطي كثافة طاقة أعلى بعشر مرات تقريبًا. لكن، فيه تحديات كبيرة، منها التكلفة العالية، وتعقيد بناء الأقمار الصناعية، ومنافسة مصادر الطاقة المتجددة الأرضية الأرخص والأسرع." },
+    { id:'q2-step-3', lang:'ar-SA', cls:'lang-ar correct', tone:'excited', text:"شوفي معاي، هذا التلخيص بكلمات جديدة بالكامل، عدد كلماته ستة وثمانين كلمة بالضبط، يعني بالضبط ضمن حد التسعين كلمة المطلوب، وفيه توثيق صحيح بالنهاية. تلخيص يستاهل علامة كاملة!" }
   ],
 
   q3: [
     { id:'q3-step-0', lang:'ar-SA', cls:'lang-ar', text:"هذا سؤال يحبه كثير من الطلاب، لأنه بس خطوتين وخلاص! عندنا شركة إيكو ويف، وخمس فراغات نعبيها." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"الخطوة الأولى: اسألي نفسك مين سوّى الفعل؟ والخطوة الثانية: شوفي كلمة بالجملة تدلك على الزمن. بس كذا!" },
-    { id:'q3-step-2', lang:'ar-SA', cls:'lang-ar', text:"خل نبدأ بالفراغ الأول." },
+    { id:'q3-step-2', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"خل نبدأ بالفراغ الأول." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"فكري معاي: الشركة أسست نفسها بنفسها؟ لا! فريق علماء هم اللي أسسوها. يعني الشركة استقبلت الفعل، فهذا باسيف. وكلمة في عام ألفين وخمستعشر تخبرنا إنه زمن ماضي." },
-    { id:'q3-step-3', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الثاني." },
+    { id:'q3-step-3', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"والفراغ الثاني." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"هنا الشركة هي اللي صممت بنفسها، يعني أكتيف. وكلمة سينس يعني منذ، تدل على شي مستمر من الماضي للحاضر." },
-    { id:'q3-step-4', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الثالث." },
+    { id:'q3-step-4', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"والفراغ الثالث." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"الشركة ركّبت الأجهزة بنفسها، فهذا أكتيف، وكلمة لاست يير يعني العام الماضي تدل على ماضي بسيط." },
-    { id:'q3-step-5', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الرابع." },
+    { id:'q3-step-5', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"والفراغ الرابع." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"النظام ما أطلق نفسه، الشركة هي اللي أطلقته. يعني باسيف، وكلمة لاست مونث تدل على ماضي بسيط أيضًا." },
-    { id:'q3-step-6', lang:'ar-SA', cls:'lang-ar', text:"وآخر فراغ، الخامس." },
-    { id:'q3-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"المصانع ما تبني نفسها بنفسها، فهذا باسيف، وكلمة نكست يير يعني العام القادم تدل على المستقبل. وبكذا حلينا الخمس فراغات بنفس الطريقة بالضبط، سهلة مرة!" }
+    { id:'q3-step-6', lang:'ar-SA', cls:'lang-ar', tone:'transition', text:"وآخر فراغ، الخامس." },
+    { id:'q3-step-7', lang:'ar-SA', cls:'lang-ar correct', tone:'answer', text:"المصانع ما تبني نفسها بنفسها، فهذا باسيف، وكلمة نكست يير يعني العام القادم تدل على المستقبل. وبكذا حلينا الخمس فراغات بنفس الطريقة بالضبط، سهلة مرة!" }
   ],
 
   q4: [
     { id:'q4-para-a', lang:'ar-SA', cls:'lang-ar', text:"الفقرة أ هذي مقدمة عامة بس، تمهّد للموضوع كامل عن تغيّر طبيعة الوظائف بسبب التكنولوجيا." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها الأنسب هو تغيّر طبيعة الوظائف، لأنها بتكلم عن الموضوع بشكل عام." },
-    { id:'q4-para-b', lang:'ar-SA', cls:'lang-ar', text:"وشوفي الفقرة ب، أول كلمة فيها هيستوريكلي، يعني تاريخيًا! هذي وحدها كفاية تخبرك بكل شي." },
+    { id:'q4-para-b', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"وشوفي الفقرة ب، أول كلمة فيها هيستوريكلي، يعني تاريخيًا! هذي وحدها كفاية تخبرك بكل شي." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها طبعًا العمل في الماضي، ما يحتاج تفكير زيادة." },
     { id:'q4-para-c', lang:'ar-SA', cls:'lang-ar', text:"والفقرة سي تتكلم عن الكمبيوتر والإنترنت وكيف غيّروا طريقة العمل." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"كلمة ديجيتال تتكرر كثير هنا، فعنوانها المناسب هو التحول الرقمي." },
@@ -929,13 +959,13 @@ const narrations = {
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها الأتمتة والمستقبل، منطقي جدًا." },
     { id:'q4-para-e', lang:'ar-SA', cls:'lang-ar', text:"وآخر فقرة عندنا، إي، تتكلم عن وظائف جديدة تحتاج إبداع ومهارات تكيّف." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها مهارات وفرص جديدة، تمام؟" },
-    { id:'q4-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"وآخر شي، العنوان اللي ما استخدمناه أبدًا هو التحديات الأخلاقية للتكنولوجيا، وهذا عنوان الفقرة إف اللي السؤال ما طلب منا نحطها أصلًا، فهو عنوانها الزائد. وخلصنا!" }
+    { id:'q4-step-7', lang:'ar-SA', cls:'lang-ar correct', tone:'answer', text:"وآخر شي، العنوان اللي ما استخدمناه أبدًا هو التحديات الأخلاقية للتكنولوجيا، وهذا عنوان الفقرة إف اللي السؤال ما طلب منا نحطها أصلًا، فهو عنوانها الزائد. وخلصنا!" }
   ],
 
   q5: [
     { id:'q5-step-0', lang:'ar-SA', cls:'lang-ar', text:"عندنا ست كلمات بالنص لازم نطابقها مع تعريفاتها. بس خلينا صريحين، ما نحتاج نحفظ كل الكلمات، فيه طريقة أذكى من هذا." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"دايمًا ابدئي بأوضح كلمة، الكلمة اللي ما تحتاج تفكير." },
-    { id:'q5-step-6', lang:'ar-SA', cls:'lang-ar', text:"شوفي التعريف العاشر: العمل مع الآخرين لتحقيق هدف مشترك." },
+    { id:'q5-step-6', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"شوفي التعريف العاشر: العمل مع الآخرين لتحقيق هدف مشترك." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذي بديهية! الكلمة اللي تشبه فعل التعاون، تعرفينها من شكلها مباشرة." },
     { id:'q5-step-2', lang:'ar-SA', cls:'lang-ar', text:"والتعريف السادس: توقعات حول ما سيحدث بالمستقبل." },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"كلمة التوقعات بالإنجليزي، سهلة لو ركزتي." },
@@ -949,7 +979,7 @@ const narrations = {
   ],
 
   q6: [
-    { id:'q6-step-1', lang:'ar-SA', cls:'lang-ar', text:"يلا نبدأ بآخر سؤال، خمس أسئلة قصيرة بس. أول سؤال: ليش كانت الوظائف بالماضي مستقرة وثابتة؟" },
+    { id:'q6-step-1', lang:'ar-SA', cls:'lang-ar', tone:'excited', text:"يلا نبدأ بآخر سؤال، خمس أسئلة قصيرة بس. أول سؤال: ليش كانت الوظائف بالماضي مستقرة وثابتة؟" },
     { id:null, lang:'ar-SA', cls:'lang-ar', text:"السر هنا، دوّري على كلمة مستقرة بالفقرة اللي تتكلم عن الماضي، وراح تلاقين الجواب جنبها تمامًا." },
     { id:'q6-step-1', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: لأن العمل كان يتبع أنظمة وروتين ثابت داخل صناعات محددة." },
     { id:'q6-step-2', lang:'ar-SA', cls:'lang-ar', text:"والسؤال الثاني: كيف غيّرت التكنولوجيا الرقمية قطاعات العمل؟" },
@@ -1119,8 +1149,9 @@ function speakStep(qid, idx, fromUserGesture){
   } else {
     utter.lang = step.lang;
   }
-  utter.rate = 0.82;
-  utter.pitch = 0.95;
+  const prosody = getSpeechProsody(step);
+  utter.rate = prosody.rate;
+  utter.pitch = prosody.pitch;
   utter.volume = 1;
 
   let advanced = false;
@@ -1133,14 +1164,14 @@ function speakStep(qid, idx, fromUserGesture){
     }
   };
 
-  utter.onstart = () => console.log('[speakStep] onstart', idx, utter.voice?.name || 'default');
+  utter.onstart = () => console.log('[speakStep] onstart', idx, { tone: prosody.tone, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name || 'default' });
   utter.onend = () => { console.log('[speakStep] onend', idx); goNext(); };
   utter.onerror = (e) => {
     console.warn('[speakStep] onerror', idx, e.error);
     if(e.error !== 'interrupted') goNext();
   };
 
-  const estMs = Math.max(2500, step.text.length * 110);
+  const estMs = Math.max(2000, (step.text.length * 110) / prosody.rate);
   setTimeout(() => { if(!advanced) goNext(); }, estMs);
 
   try{
@@ -1151,7 +1182,7 @@ function speakStep(qid, idx, fromUserGesture){
       window.speechSynthesis.cancel();
     }
     keepSpeechAlive();
-    console.log('[speakStep] before speak()', { idx, voice: utter.voice?.name, lang: utter.lang, textLen: step.text.length });
+    console.log('[speakStep] before speak()', { idx, tone: prosody.tone, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name, lang: utter.lang, textLen: step.text.length });
     window.speechSynthesis.speak(utter);
     console.log('[speakStep] after speak()', { speaking: window.speechSynthesis.speaking, pending: window.speechSynthesis.pending, paused: window.speechSynthesis.paused });
   }catch(e){
@@ -1196,7 +1227,9 @@ function testVoice(){
   } else {
     utter.lang = 'ar-SA';
   }
-  utter.rate = 0.85;
+  const testProsody = getSpeechProsody({ text: 'أهلين! إذا تسمعين هذا الصوت، يعني كل شي شغّال تمام.', tone: 'excited' });
+  utter.rate = testProsody.rate;
+  utter.pitch = testProsody.pitch;
   utter.onstart = () => {
     console.log('[testVoice] onstart', utter.voice?.name);
     resultEl.textContent = arVoice
