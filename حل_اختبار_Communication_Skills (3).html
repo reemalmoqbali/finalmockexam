@@ -393,8 +393,11 @@
     .vocab-row{grid-template-columns:1fr;gap:6px;}
     .vocab-row .word{justify-self:start;}
     .grid-2{grid-template-columns:1fr;}
-    .test-voice-bar{flex-direction:column;gap:8px;text-align:center;}
+    .test-voice-bar{flex-direction:column;gap:8px;text-align:center;padding-top:10px;}
     .test-voice-btn{width:100%;max-width:320px;}
+    .voice-speed-presets{width:100%;}
+    .speed-preset-btn{flex:1;min-width:90px;text-align:center;padding:8px 8px;}
+    .audio-controls-panel{padding:14px 12px;margin:16px 0 8px;}
     #test-voice-result{text-align:center;line-height:1.5;}
     .divider{letter-spacing:4px;font-size:16px;}
     table.fill{font-size:13px;}
@@ -493,9 +496,65 @@
     margin-top:10px; font-size:14px; font-weight:800; letter-spacing:1px;
     color:var(--green); opacity:1;
   }
+  .audio-controls-panel{
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    padding:16px 18px;
+    margin:20px 0 10px;
+    box-shadow:0 4px 14px -8px rgba(31,42,36,0.12);
+  }
+  .voice-speed-control{margin-bottom:14px;}
+  .voice-speed-header{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:10px; flex-wrap:wrap; margin-bottom:10px;
+  }
+  .voice-speed-label{
+    font-size:14px; font-weight:800; color:var(--green);
+  }
+  .voice-speed-value{
+    font-size:12px; font-weight:800; color:var(--ocean);
+    background:var(--ocean-soft); padding:4px 12px; border-radius:999px;
+  }
+  .voice-speed-slider{
+    -webkit-appearance:none; appearance:none;
+    width:100%; height:8px; border-radius:999px;
+    background:linear-gradient(90deg, var(--green-soft), var(--sun-soft), var(--ocean-soft));
+    outline:none; cursor:pointer; margin:4px 0 12px;
+  }
+  .voice-speed-slider::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--green); border:3px solid #fff;
+    box-shadow:0 2px 8px rgba(27,77,62,0.45);
+    cursor:pointer;
+  }
+  .voice-speed-slider::-moz-range-thumb{
+    width:22px; height:22px; border-radius:50%;
+    background:var(--green); border:3px solid #fff;
+    box-shadow:0 2px 8px rgba(27,77,62,0.45);
+    cursor:pointer;
+  }
+  .voice-speed-slider:focus::-webkit-slider-thumb{
+    box-shadow:0 0 0 3px var(--sun), 0 2px 8px rgba(27,77,62,0.45);
+  }
+  .voice-speed-presets{
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+  }
+  .speed-preset-btn{
+    background:var(--paper); border:1.5px solid var(--line);
+    color:var(--ink); border-radius:999px; padding:8px 14px;
+    font-size:12px; font-weight:800; cursor:pointer;
+    font-family:inherit; transition:.15s;
+  }
+  .speed-preset-btn:hover{background:var(--sun-soft); border-color:var(--sun);}
+  .speed-preset-btn.speed-preset-active{
+    background:var(--green); border-color:var(--green); color:#fff;
+  }
   .test-voice-bar{
     display:flex; align-items:center; gap:12px; justify-content:center;
-    margin:8px 0 18px; flex-wrap:wrap;
+    margin:0; flex-wrap:wrap;
+    padding-top:12px; border-top:1px dashed var(--line);
   }
   .test-voice-btn{
     background:var(--coral); color:#fff; border:none;
@@ -534,9 +593,25 @@
     <a href="#q6">س6 — أسئلة قصيرة<small>25 درجة</small></a>
   </div>
 
-  <div class="test-voice-bar">
-    <button class="test-voice-btn" onclick="testVoice()">🔊 جرّبي الصوت هنا أول</button>
-    <span id="test-voice-result"></span>
+  <div class="audio-controls-panel">
+    <div class="voice-speed-control">
+      <div class="voice-speed-header">
+        <span class="voice-speed-label">🎚️ سرعة الصوت</span>
+        <span id="voice-speed-display" class="voice-speed-value">طبيعية (1.00×)</span>
+      </div>
+      <input type="range" id="voice-speed-slider" class="voice-speed-slider"
+        min="0.8" max="1.4" step="0.05" value="1.0"
+        aria-label="سرعة الصوت" aria-valuemin="0.8" aria-valuemax="1.4">
+      <div class="voice-speed-presets">
+        <button type="button" class="speed-preset-btn" data-speed="0.85" onclick="setSpeedPreset(0.85)">🐢 أبطأ</button>
+        <button type="button" class="speed-preset-btn speed-preset-active" data-speed="1.0" onclick="setSpeedPreset(1.0)">▶️ طبيعية</button>
+        <button type="button" class="speed-preset-btn" data-speed="1.25" onclick="setSpeedPreset(1.25)">🐇 أسرع</button>
+      </div>
+    </div>
+    <div class="test-voice-bar">
+      <button class="test-voice-btn" onclick="testVoice()">🔊 جرّبي الصوت هنا أول</button>
+      <span id="test-voice-result"></span>
+    </div>
   </div>
 
   <div class="divider">∽∽∽</div>
@@ -878,17 +953,74 @@
    ============================================================ */
 
 const TONE_PROSODY = {
-  excited:    { rate: 1.0,  pitch: 1.05 },
-  question:   { rate: 0.95, pitch: 1.0  },
-  explain:    { rate: 0.92, pitch: 0.97 },
-  answer:     { rate: 0.88, pitch: 0.95 },
+  excited:    { rate: 1.05, pitch: 1.05 },
+  question:   { rate: 0.98, pitch: 1.0  },
+  explain:    { rate: 1.0,  pitch: 1.0  },
+  answer:     { rate: 0.97, pitch: 0.99 },
   transition: { rate: 1.05, pitch: 1.0  }
 };
 
 const EXCITED_PATTERN = /[!！]|(?:^|\s)(يلا|تعالي|شوفي|وقفة)/;
+const SPEED_STORAGE_KEY = 'voiceSpeedPreference';
+const SPEED_MIN = 0.8;
+const SPEED_MAX = 1.4;
+const SPEED_STEP = 0.05;
+const RATE_CLAMP_MIN = 0.76;
+const RATE_CLAMP_MAX = 1.65;
+
+let speedMultiplier = 1.0;
 
 function clampRate(rate){
-  return Math.min(1.05, Math.max(0.85, rate));
+  return Math.min(RATE_CLAMP_MAX, Math.max(RATE_CLAMP_MIN, rate));
+}
+
+function getSpeedLabel(mult){
+  if(Math.abs(mult - 1.0) < 0.025) return 'طبيعية';
+  if(mult < 0.95) return 'أبطأ';
+  if(mult > 1.15) return 'أسرع';
+  if(mult < 1.0) return 'أبطأ شوي';
+  return 'أسرع شوي';
+}
+
+function loadSpeedPreference(){
+  try{
+    const saved = parseFloat(localStorage.getItem(SPEED_STORAGE_KEY));
+    if(!isNaN(saved) && saved >= SPEED_MIN && saved <= SPEED_MAX){
+      speedMultiplier = Math.round(saved / SPEED_STEP) * SPEED_STEP;
+    }
+  }catch(e){ /* ignore */ }
+}
+
+function applySpeedMultiplier(val){
+  speedMultiplier = Math.round(Math.min(SPEED_MAX, Math.max(SPEED_MIN, val)) / SPEED_STEP) * SPEED_STEP;
+  try{ localStorage.setItem(SPEED_STORAGE_KEY, String(speedMultiplier)); }catch(e){ /* ignore */ }
+  updateSpeedUI();
+  console.log('[speed] multiplier=', speedMultiplier, '→', getSpeedLabel(speedMultiplier));
+}
+
+function setSpeedPreset(val){
+  applySpeedMultiplier(val);
+}
+
+function updateSpeedUI(){
+  const display = document.getElementById('voice-speed-display');
+  const slider = document.getElementById('voice-speed-slider');
+  if(display){
+    display.textContent = `${getSpeedLabel(speedMultiplier)} (${speedMultiplier.toFixed(2)}×)`;
+  }
+  if(slider) slider.value = speedMultiplier;
+  document.querySelectorAll('.speed-preset-btn').forEach(btn => {
+    const preset = parseFloat(btn.dataset.speed);
+    btn.classList.toggle('speed-preset-active', Math.abs(preset - speedMultiplier) < 0.025);
+  });
+}
+
+function initSpeedControl(){
+  loadSpeedPreference();
+  const slider = document.getElementById('voice-speed-slider');
+  if(!slider) return;
+  updateSpeedUI();
+  slider.addEventListener('input', () => applySpeedMultiplier(parseFloat(slider.value)));
 }
 
 function detectTone(step){
@@ -903,8 +1035,9 @@ function detectTone(step){
 
 function getSpeechProsody(step){
   const tone = detectTone(step);
-  const { rate, pitch } = TONE_PROSODY[tone];
-  return { tone, rate: clampRate(rate), pitch };
+  const { rate: baseRate, pitch } = TONE_PROSODY[tone];
+  const rate = clampRate(baseRate * speedMultiplier);
+  return { tone, baseRate, rate, pitch };
 }
 
 const narrations = {
@@ -1164,7 +1297,7 @@ function speakStep(qid, idx, fromUserGesture){
     }
   };
 
-  utter.onstart = () => console.log('[speakStep] onstart', idx, { tone: prosody.tone, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name || 'default' });
+  utter.onstart = () => console.log('[speakStep] onstart', idx, { tone: prosody.tone, baseRate: prosody.baseRate, multiplier: speedMultiplier, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name || 'default' });
   utter.onend = () => { console.log('[speakStep] onend', idx); goNext(); };
   utter.onerror = (e) => {
     console.warn('[speakStep] onerror', idx, e.error);
@@ -1182,7 +1315,7 @@ function speakStep(qid, idx, fromUserGesture){
       window.speechSynthesis.cancel();
     }
     keepSpeechAlive();
-    console.log('[speakStep] before speak()', { idx, tone: prosody.tone, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name, lang: utter.lang, textLen: step.text.length });
+    console.log('[speakStep] before speak()', { idx, tone: prosody.tone, baseRate: prosody.baseRate, multiplier: speedMultiplier, rate: prosody.rate, pitch: prosody.pitch, voice: utter.voice?.name, lang: utter.lang, textLen: step.text.length });
     window.speechSynthesis.speak(utter);
     console.log('[speakStep] after speak()', { speaking: window.speechSynthesis.speaking, pending: window.speechSynthesis.pending, paused: window.speechSynthesis.paused });
   }catch(e){
@@ -1231,7 +1364,7 @@ function testVoice(){
   utter.rate = testProsody.rate;
   utter.pitch = testProsody.pitch;
   utter.onstart = () => {
-    console.log('[testVoice] onstart', utter.voice?.name);
+    console.log('[testVoice] onstart', { voice: utter.voice?.name, rate: testProsody.rate, multiplier: speedMultiplier });
     resultEl.textContent = arVoice
       ? `✅ يشتغل الآن بصوت: ${arVoice.name}`
       : voice
@@ -1325,6 +1458,8 @@ function stopNarration(){
   }
   currentQuestionId = null;
 }
+
+initSpeedControl();
 </script>
 
 </body>
