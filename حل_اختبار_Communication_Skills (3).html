@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حل اختبار Communication Skills (2) — Mock Final</title>
+<style>
+  :root{
+    --cream:#FBF6EC;
+    --paper:#FFFDF8;
+    --ink:#1F2A24;
+    --green:#1B4D3E;
+    --green-soft:#E4EFE8;
+    --sun:#F2A93B;
+    --sun-soft:#FCEBCB;
+    --ocean:#2D6E8E;
+    --ocean-soft:#DCEEF4;
+    --coral:#E8714A;
+    --coral-soft:#FBE4DA;
+    --line:#D9CFB8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 10% 5%, rgba(242,169,59,0.10), transparent 40%),
+      radial-gradient(circle at 90% 15%, rgba(45,110,142,0.10), transparent 40%);
+    font-family:'Tahoma','Segoe UI',sans-serif;
+    color:var(--ink);
+    line-height:1.7;
+    padding:0;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:linear-gradient(135deg,var(--green) 0%, #123830 100%);
+    color:#fff;
+    border-radius:22px;
+    padding:34px 28px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 14px 30px -10px rgba(27,77,62,0.45);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(242,169,59,0.35), transparent 45%),
+      radial-gradient(circle at 15% 90%, rgba(45,110,142,0.35), transparent 45%);
+  }
+  .hero-content{position:relative;z-index:2;max-width:100%;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    padding:6px 14px; border-radius:999px;
+    font-size:13px; letter-spacing:.5px; margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(22px,4vw,36px);
+    margin:0 0 8px;
+    font-weight:800;
+    line-height:1.35;
+    overflow-wrap:break-word;
+  }
+  .hero p{margin:0; opacity:.9; font-size:15px; max-width:560px;overflow-wrap:break-word;}
+  .author-tag{
+    display:inline-block; margin-top:16px;
+    background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);
+    padding:7px 16px; border-radius:999px;
+    font-size:13px; font-weight:800; letter-spacing:1.2px;
+  }
+  .energy-bar{
+    margin-top:22px; display:flex; gap:6px; align-items:center;
+  }
+  .energy-bar .bolt{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--sun);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  .energy-bar .bolt:nth-child(2){animation-delay:.3s}
+  .energy-bar .bolt:nth-child(3){animation-delay:.6s}
+  .energy-bar .bolt:nth-child(4){animation-delay:.9s}
+  .energy-bar .bolt:nth-child(5){animation-delay:1.2s}
+  @keyframes pulse{
+    0%,100%{transform:scale(1); opacity:.7;}
+    50%{transform:scale(1.18); opacity:1;}
+  }
+  .total-badge{
+    position:absolute; top:24px; left:24px; z-index:3;
+    background:var(--sun); color:#1F2A24;
+    font-weight:800; font-size:14px;
+    padding:10px 16px; border-radius:14px;
+    box-shadow:0 6px 14px -4px rgba(0,0,0,.3);
+    text-align:center;
+  }
+  .total-badge span{display:block; font-size:20px;}
+
+  /* ===== TOC ===== */
+  .toc{
+    margin:26px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  }
+  .toc a{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:14px; padding:12px 10px; text-align:center;
+    text-decoration:none; color:var(--green); font-weight:700; font-size:13px;
+    transition:.2s;
+  }
+  .toc a:hover{background:var(--sun-soft); transform:translateY(-2px);}
+  .toc a small{display:block; font-weight:400; color:var(--ink); opacity:.6; margin-top:2px;}
+
+  /* ===== SECTION ===== */
+  .q-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:20px;
+    margin:22px 0;
+    overflow:hidden;
+    box-shadow:0 6px 18px -10px rgba(31,42,36,0.15);
+  }
+  .q-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 22px;
+    background:var(--green-soft);
+    border-bottom:1px solid var(--line);
+    gap:14px; flex-wrap:wrap;
+  }
+  .q-head h2{
+    margin:0; font-size:17px; color:var(--green); font-weight:800;
+    display:flex; align-items:center; gap:10px;
+  }
+  .q-num{
+    background:var(--green); color:#fff;
+    width:30px;height:30px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px; flex-shrink:0;
+  }
+  .marks-pill{
+    background:var(--sun); color:#1F2A24; font-weight:800; font-size:12px;
+    padding:5px 12px; border-radius:999px; white-space:nowrap;
+  }
+  .q-body{padding:20px 22px;}
+
+  /* ===== VOICE PLAYER ===== */
+  .voice-bar{
+    display:flex; align-items:center; gap:12px;
+    background:linear-gradient(90deg, var(--green-soft), var(--ocean-soft));
+    border:1.5px solid var(--green);
+    border-radius:14px; padding:10px 14px; margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .play-btn{
+    background:var(--green); color:#fff; border:none;
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:16px; flex-shrink:0;
+    transition:.15s; box-shadow:0 4px 10px -3px rgba(27,77,62,0.5);
+  }
+  .play-btn:hover{transform:scale(1.06);}
+  .play-btn.playing{background:var(--coral);}
+  .voice-status{
+    flex:1 1 auto; font-size:13px; font-weight:700; color:var(--green);
+    min-width:0;
+    overflow-wrap:break-word;
+    word-wrap:break-word;
+  }
+  .voice-status .lang-tag{
+    display:inline-block; font-size:10px; font-weight:800;
+    padding:2px 8px; border-radius:6px; margin-left:6px;
+    background:var(--sun); color:#1F2A24;
+  }
+  .voice-status .lang-tag.ar{background:var(--ocean); color:#fff;}
+  .voice-progress{
+    display:flex; gap:4px; align-items:center;
+    flex-wrap:wrap;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .voice-progress .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--line);
+    transition:.2s;
+  }
+  .voice-progress .dot.active{background:var(--coral); transform:scale(1.4);}
+  .voice-progress .dot.done{background:var(--green);}
+  .stop-btn{
+    background:transparent; border:1.5px solid var(--coral); color:var(--coral);
+    border-radius:10px; padding:8px 12px; font-size:12px; font-weight:700;
+    cursor:pointer; display:none;
+  }
+  .stop-btn.show{display:inline-block;}
+  .no-voice-msg{
+    display:none; font-size:12px; color:var(--coral); font-weight:700;
+  }
+
+  .answer-box{
+    background:var(--ocean-soft); border-right:5px solid var(--ocean);
+    border-radius:10px; padding:14px 16px; margin:10px 0;
+    transition:.4s;
+  }
+  .answer-box .label{font-size:12px; font-weight:800; color:var(--ocean); letter-spacing:.5px; margin-bottom:4px;}
+  .why-box{
+    background:var(--sun-soft); border-right:5px solid var(--sun);
+    border-radius:10px; padding:14px 16px; margin:10px 0; font-size:14px;
+    transition:.4s;
+  }
+  .why-box .label{font-size:12px; font-weight:800; color:#946315; letter-spacing:.5px; margin-bottom:4px;}
+  .tip-box{
+    background:var(--coral-soft); border-right:5px solid var(--coral);
+    border-radius:10px; padding:14px 16px; margin:10px 0; font-size:14px;
+    transition:.4s;
+  }
+  .tip-box .label{font-size:12px; font-weight:800; color:var(--coral); letter-spacing:.5px; margin-bottom:4px;}
+  .method-box{
+    background:#FFFFFF; border:2px solid var(--green);
+    border-radius:14px; padding:16px 18px; margin:14px 0;
+    font-size:14px; line-height:1.9;
+    transition:.4s;
+  }
+  .method-box .label{
+    display:flex; align-items:center; gap:6px;
+    font-size:13px; font-weight:800; color:#fff; letter-spacing:.3px;
+    background:var(--green); padding:6px 14px; border-radius:8px;
+    margin:-16px -18px 12px -18px; width:fit-content;
+  }
+  .method-box ol, .method-box ul{margin:6px 0 0; padding-right:20px;}
+  .method-box li{margin-bottom:8px;}
+  .method-box .kw{
+    background:var(--sun-soft); color:#7a5414; font-weight:800;
+    padding:2px 8px; border-radius:6px; font-size:13px;
+  }
+  .method-box .en{direction:ltr; display:inline-block; font-family:Georgia,serif; color:var(--ocean); font-weight:700;}
+
+  /* HIGHLIGHT STATE — applied via JS to any .narratable element */
+  .narratable{
+    transition: background-color .5s ease, box-shadow .5s ease, transform .3s ease;
+    border-radius:8px;
+  }
+  .narratable.speaking{
+    background-color:#FFF3C4 !important;
+    box-shadow:0 0 0 3px var(--sun), 0 6px 16px -6px rgba(242,169,59,0.6);
+    transform:scale(1.01);
+  }
+  .narratable.speaking.lang-ar{
+    background-color:#D8ECF2 !important;
+    box-shadow:0 0 0 3px var(--ocean), 0 6px 16px -6px rgba(45,110,142,0.55);
+  }
+  .narratable.speaking.lang-correct{
+    background-color:#D4ECDF !important;
+    box-shadow:0 0 0 3px var(--green), 0 6px 16px -6px rgba(27,77,62,0.55);
+  }
+
+  .options{display:flex; flex-direction:column; gap:8px; margin:12px 0;}
+  .opt{
+    padding:10px 14px; border-radius:10px; border:1.5px solid var(--line);
+    font-size:14px; display:flex; gap:10px; align-items:flex-start;
+  }
+  .opt.correct{
+    border-color:var(--green); background:var(--green-soft);
+    font-weight:700;
+  }
+  .opt .letter{
+    background:#fff; border:1.5px solid var(--line); border-radius:50%;
+    width:24px;height:24px; flex:none; display:flex;align-items:center;justify-content:center;
+    font-size:12px; font-weight:800;
+  }
+  .opt.correct .letter{background:var(--green); color:#fff; border-color:var(--green);}
+  .check{color:var(--green); font-weight:900; margin-right:4px;}
+
+  .table-wrap{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:10px 0;
+    border-radius:10px;
+  }
+  .table-wrap::-webkit-scrollbar{height:6px;}
+  .table-wrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+  table.fill{
+    width:100%; min-width:520px; border-collapse:collapse; font-size:14px;
+    margin:0;
+  }
+  table.fill th, table.fill td{
+    border:1px solid var(--line); padding:10px 12px; text-align:right;
+  }
+  table.fill th{background:var(--green-soft); color:var(--green); font-weight:800;}
+  table.fill td.ans{color:var(--ocean); font-weight:800;}
+  table.fill tr.narratable.speaking td{background-color:#FFF3C4;}
+
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+
+  .opt,.q-instructions,.summary-essay,.why-box,.answer-box,.tip-box,.short-q{
+    overflow-wrap:break-word;word-wrap:break-word;
+  }
+  .heading-match{flex-wrap:wrap;gap:8px;}
+  .heading-match > span:last-child{text-align:left;direction:ltr;}
+  .original-text p,.original-text h4{overflow-wrap:break-word;word-break:break-word;}
+
+  /* ===== TABLET (≤768px) ===== */
+  @media(max-width:768px){
+    .wrap{padding:22px 14px 48px;}
+    .hero{padding:28px 20px;}
+    .toc{grid-template-columns:repeat(2,1fr);}
+    .q-head{padding:16px 18px;}
+    .q-body{padding:16px 18px;}
+    .q-head h2{font-size:16px;}
+    .vocab-row{grid-template-columns:1.5fr 1fr;gap:8px;}
+    .divider{letter-spacing:6px;margin:24px 0;}
+    .grid-2{grid-template-columns:1fr;}
+  }
+
+  /* ===== MOBILE (≤480px) ===== */
+  @media(max-width:480px){
+    .wrap{padding:16px 12px 40px;}
+    .hero{
+      display:flex;
+      flex-direction:column;
+      padding:18px 14px 20px;
+      border-radius:16px;
+    }
+    .total-badge{
+      position:static;
+      align-self:flex-start;
+      margin:0 0 14px;
+      font-size:12px;
+      padding:8px 12px;
+    }
+    .total-badge span{font-size:18px;}
+    .eyebrow{font-size:11px;padding:5px 10px;max-width:100%;flex-wrap:wrap;}
+    .hero h1{font-size:clamp(20px,6vw,26px);}
+    .hero p{font-size:14px;}
+    .author-tag{font-size:11px;padding:6px 12px;letter-spacing:.8px;}
+    .energy-bar .bolt{width:22px;height:22px;font-size:12px;}
+    .toc{grid-template-columns:1fr;gap:8px;margin:20px 0;}
+    .toc a{font-size:12px;padding:10px 8px;}
+    .q-card{border-radius:16px;margin:16px 0;}
+    .q-head{flex-direction:column;align-items:flex-start;padding:14px;}
+    .q-head h2{font-size:15px;line-height:1.45;}
+    .marks-pill{align-self:flex-start;}
+    .q-body{padding:14px 12px;}
+    .voice-bar{
+      gap:10px;
+      padding:12px;
+      align-items:flex-start;
+    }
+    .voice-bar .play-btn{order:1;}
+    .voice-status{
+      order:2;
+      flex:1 1 calc(100% - 54px);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .voice-progress{
+      order:3;
+      flex:1 1 100%;
+      justify-content:flex-start;
+      max-width:100%;
+    }
+    .voice-bar .stop-btn.show{
+      order:4;
+      flex:1 1 100%;
+      width:100%;
+      text-align:center;
+      padding:10px;
+    }
+    .voice-status .lang-tag{
+      display:block;
+      width:fit-content;
+      margin:6px 0 0;
+    }
+    .method-box{padding:14px 12px;overflow:hidden;}
+    .method-box .label{
+      margin:-14px -12px 12px -12px;
+      max-width:calc(100% + 24px);
+      font-size:12px;
+      line-height:1.45;
+      padding:6px 10px;
+    }
+    .original-text{padding:12px;font-size:13px;border-radius:12px;}
+    .original-text h4{font-size:14px;line-height:1.4;}
+    .opt{font-size:13px;padding:10px 12px;}
+    .opt .letter{width:22px;height:22px;font-size:11px;}
+    .heading-match{
+      flex-direction:column;
+      align-items:flex-start;
+      font-size:13px;
+      padding:10px 12px;
+    }
+    .heading-match > span:last-child{width:100%;}
+    .vocab-row{grid-template-columns:1fr;gap:6px;}
+    .vocab-row .word{justify-self:start;}
+    .grid-2{grid-template-columns:1fr;}
+    .test-voice-bar{flex-direction:column;gap:8px;text-align:center;}
+    .test-voice-btn{width:100%;max-width:320px;}
+    #test-voice-result{text-align:center;line-height:1.5;}
+    .divider{letter-spacing:4px;font-size:16px;}
+    table.fill{font-size:13px;}
+    table.fill th,table.fill td{padding:8px 10px;}
+    .narratable.speaking{transform:none;}
+  }
+
+  /* ===== SMALL MOBILE (≤320px) ===== */
+  @media(max-width:320px){
+    .wrap{padding:12px 8px 32px;}
+    .hero{padding:14px 10px 16px;}
+    .hero h1{font-size:19px;}
+    .q-body{padding:12px 8px;}
+    .voice-bar{padding:10px 8px;}
+    .play-btn{width:38px;height:38px;font-size:14px;}
+  }
+
+  /* ===== DESKTOP (≥1200px) ===== */
+  @media(min-width:1200px){
+    .wrap{padding:32px 24px 72px;}
+    .hero{padding:38px 32px;}
+    .q-body{padding:22px 26px;}
+  }
+
+  .para-tag{
+    display:inline-block; background:var(--ocean); color:#fff; font-size:12px;
+    font-weight:800; padding:3px 10px; border-radius:8px; margin-left:6px;
+  }
+  .heading-match{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 14px; background:var(--ocean-soft); border-radius:10px; margin:6px 0;
+    font-size:14px; font-weight:700; color:var(--ink);
+  }
+  .heading-match.extra{
+    margin-top:10px; background:var(--coral-soft); color:var(--coral);
+    padding:10px 14px; border-radius:10px; font-size:13px; font-weight:700;
+  }
+
+  .vocab-row{
+    display:grid; grid-template-columns:2fr 1fr; gap:10px; align-items:center;
+    padding:10px 0; border-bottom:1px dashed var(--line);
+  }
+  .vocab-row:last-child{border-bottom:none;}
+  .vocab-row .word{
+    background:var(--sun); color:#1F2A24; font-weight:800;
+    padding:6px 14px; border-radius:999px; text-align:center; font-size:14px;
+  }
+
+  .short-q{margin:14px 0; padding:14px; background:var(--green-soft); border-radius:12px;}
+  .short-q .q{font-weight:800; color:var(--green); margin-bottom:6px; font-size:14px;}
+  .short-q .a{color:var(--ink); font-size:14px;}
+
+  .summary-essay{
+    background:var(--green-soft); border:1px dashed var(--green);
+    border-radius:14px; padding:16px; font-size:14.5px; line-height:1.85;
+    transition:.4s;
+  }
+  .word-count{
+    display:inline-block; margin-top:10px; background:var(--green); color:#fff;
+    font-size:12px; font-weight:800; padding:5px 12px; border-radius:999px;
+  }
+
+  .original-text{
+    background:#fff; border:1.5px dashed var(--ocean);
+    border-radius:14px; padding:16px 18px; margin-bottom:16px;
+    font-size:14px; line-height:1.85; direction:ltr; text-align:left;
+    font-family:'Georgia','Times New Roman',serif;
+    color:#2A3530;
+    overflow-wrap:break-word;
+    word-wrap:break-word;
+    word-break:break-word;
+    max-width:100%;
+  }
+  .original-text .src-tag{
+    direction:rtl; text-align:right;
+    display:inline-block; background:var(--ocean); color:#fff;
+    font-size:11px; font-weight:800; padding:4px 10px; border-radius:8px;
+    margin-bottom:10px; font-family:'Tahoma',sans-serif;
+  }
+  .original-text h4{
+    margin:0 0 8px; font-size:15px; color:var(--green);
+  }
+  .original-text p{margin:0 0 10px;}
+  .original-text strong{color:var(--coral);}
+  .q-instructions{
+    background:var(--sun-soft); border-radius:10px; padding:10px 14px;
+    font-size:13px; font-weight:700; color:#7a5414; margin-bottom:14px;
+    direction:rtl;
+  }
+
+  footer{
+    text-align:center; margin-top:40px; padding:24px;
+    color:var(--green); font-size:13px; opacity:.75;
+  }
+  footer .by-line{
+    margin-top:10px; font-size:14px; font-weight:800; letter-spacing:1px;
+    color:var(--green); opacity:1;
+  }
+  .test-voice-bar{
+    display:flex; align-items:center; gap:12px; justify-content:center;
+    margin:8px 0 18px; flex-wrap:wrap;
+  }
+  .test-voice-btn{
+    background:var(--coral); color:#fff; border:none;
+    padding:10px 20px; border-radius:999px; font-size:13px; font-weight:800;
+    cursor:pointer; box-shadow:0 6px 14px -4px rgba(232,113,74,0.5);
+  }
+  .test-voice-btn:hover{transform:translateY(-1px);}
+  #test-voice-result{font-size:12px; font-weight:700; color:var(--green);}
+  .divider{
+    text-align:center; margin:30px 0; color:var(--line); font-size:20px; letter-spacing:10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="total-badge">المجموع<span>100</span></div>
+    <div class="hero-content">
+      <div class="eyebrow">⚡ UNIR2100 — Communication Skills (2)</div>
+      <h1>حل اختبار Mock Final الشامل</h1>
+      <p>حل مفصّل لكل سؤال، مع شرح صوتي تفاعلي يحدد كل نقطة وهو يتكلم عنها 🎧</p>
+      <div class="author-tag">BY REEM AL MOQBALI</div>
+      <div class="energy-bar">
+        <div class="bolt">1</div><div class="bolt">2</div><div class="bolt">3</div><div class="bolt">4</div><div class="bolt">5</div><div class="bolt">6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#q1">س1 — الاختيار من متعدد<small>10 درجات</small></a>
+    <a href="#q2">س2 — التلخيص<small>25 درجة</small></a>
+    <a href="#q3">س3 — Active/Passive<small>15 درجة</small></a>
+    <a href="#q4">س4 — العناوين<small>15 درجة</small></a>
+    <a href="#q5">س5 — المفردات<small>10 درجات</small></a>
+    <a href="#q6">س6 — أسئلة قصيرة<small>25 درجة</small></a>
+  </div>
+
+  <div class="test-voice-bar">
+    <button class="test-voice-btn" onclick="testVoice()">🔊 جرّبي الصوت هنا أول</button>
+    <span id="test-voice-result"></span>
+  </div>
+
+  <div class="divider">∽∽∽</div>
+
+  <!-- ============ Q1 ============ -->
+  <div class="q-card" id="q1">
+    <div class="q-head">
+      <h2><span class="q-num">1</span>الاختيار من متعدد — أفضل تلخيص بتوثيق APA</h2>
+      <span class="marks-pill">10 درجات</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q1">
+        <button class="play-btn" onclick="toggleNarration('q1')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+      <div class="no-voice-msg">المتصفح ما يدعم الأصوات. جرّبي Chrome أو Edge.</div>
+
+      <div class="q-instructions">📋 السؤال: Read the original text and choose the best summary with an APA in-text citation. (1×10 = 10 Marks)</div>
+      <div class="original-text narratable" id="q1-step-0">
+        <span class="src-tag">📰 النص الأصلي — Reuters</span>
+        <h4>Japan's J-power plans to expand wind energy <br>By Yuka Obayashi — October 31, 2025</h4>
+        <p>Japan's Electric Power Development Company, known as J-Power, announced that it will close two old coal-fired power plants by March 2029. This move supports Japan's plan to cut carbon dioxide emissions by 46% by 2030, compared with 2013 levels. The company said J-Power is also focusing on renewable energy, especially offshore wind power. J-Power still depends heavily on coal, which provides more than half of its electricity sales in Japan. To meet future energy and environmental goals, J-Power plans to close other inefficient coal plants. Closing all these units would reduce the company's total power generation capacity by 12%. Japan's overall electricity demand is expected to increase in the coming years because of the growth of data centers and semiconductor factories. These industries require large amounts of power, reversing Japan's previous trend of falling electricity use. The company emphasized that Japan must expand renewable energy sources, like wind power, to achieve both carbon neutrality (zero net emissions) and energy security (a stable power supply). However, offshore wind developers are facing challenges such as rising material, equipment, and labor costs.</p>
+      </div>
+      <div class="q-instructions" style="background:var(--ocean-soft); color:var(--ocean);">اختر التلخيص الأفضل من بين الخيارات الأربعة التالية:</div>
+
+      <div class="options">
+        <div class="opt narratable" id="q1-step-1"><span class="letter">a</span> J-Power announced plans to close coal plants by 2029 to meet Japan's 2030 climate goals and invest in offshore wind projects. The company, one of Japan's largest power producers, may also collaborate with European and Arab partners to develop new green technologies. Japan's energy demand is expected to rise, but J-Power remains confident about reaching carbon neutrality despite increasing costs (Obayashi, 2025).</div>
+        <div class="opt narratable" id="q1-step-2"><span class="letter">b</span> According to Obayashi (2025), Japan's Electric Power Development Company, known as J-Power, announced that it will close two old coal-fired power plants by March 2029. This move supports Japan's plan to cut carbon dioxide emissions by 46% by 2030, compared with 2013 levels. The company said J-Power is also focusing on renewable energy, especially offshore wind power.</div>
+        <div class="opt correct narratable" id="q1-step-4"><span class="letter">c</span><span class="check">✔</span> Japan's Electric Power Development Company (J-Power) plans to close two old coal plants by 2029 to help Japan cut carbon emissions by 46% by 2030. However, the company aims to expand renewable energy, focusing on offshore wind projects to meet Japan's growing power needs from data centers and chip factories demand. Rising material and labour costs pose challenges to achieve both carbon neutrality and energy security (Obayashi, 2025).</div>
+        <div class="opt narratable" id="q1-step-3"><span class="letter">d</span> Yuka Obayashi (2025) reports in Reuter that J-Power plans to shut down two coal plants by 2029 and shift toward offshore wind energy to support Japan's carbon reduction target. The country's power demand is expected to rise due to data centers and semiconductor factories, while rising costs may slow renewable expansion.</div>
+      </div>
+
+      <div class="method-box narratable" id="q1-step-5">
+        <div class="label">💡 كيف تحل هذا النوع من السؤال بدون ما تترجمين كل كلمة</div>
+        <ol>
+          <li>ما يحتاج تفهمين كل كلمة بالنص الأصلي. ركزي بس على: <span class="kw">من؟</span> (J-Power) و<span class="kw">سوّى وش؟</span> (يقفل محطات فحم) و<span class="kw">ليش؟</span> (يقلل التلوث ويتوسع بطاقة الرياح).</li>
+          <li>بعدين روحي للخيارات الأربعة وشيلي أي خيار فيه <strong>معلومة غريبة مو موجودة بالنص الأصلي</strong> (مثل ذكر "European and Arab partners" في الخيار a — هذا مو موجود بالنص فهو غلط فورًا).</li>
+          <li>شيلي أي خيار يكون <strong>نفس كلمات النص الأصلي حرف بحرف</strong> لجملتين أو أكثر (الخيار b ينسخ 3 جمل كاملة بدون أي تغيير — هذا نسخ، مو تلخيص).</li>
+          <li>اللي يبقى بعد الاستبعاد هو غالبًا الصحيح. تأكدي بس إن آخره فيه التوثيق بالشكل: <span class="en">(Author, Year)</span> مثل <span class="en">(Obayashi, 2025)</span>.</li>
+        </ol>
+      </div>
+
+      <div class="answer-box narratable" id="q1-step-6">
+        <div class="label">الإجابة الصحيحة</div>
+        الخيار <strong>c</strong>
+      </div>
+      <div class="why-box narratable" id="q1-step-7">
+        <div class="label">لماذا c هو الصحيح ولماذا الباقي خطأ</div>
+        <strong>a ✗</strong> — يضيف معلومة غير موجودة بالنص الأصلي (تعاون مع شركاء أوروبيين وعرب) = معلومة مُختلقة (fabrication).<br>
+        <strong>b ✗</strong> — يقتبس 3 جمل كاملة حرفيًا من النص بدون أي إعادة صياغة = نسخ لا تلخيص.<br>
+        <strong>c ✔</strong> — تلخيص بصياغة جديدة، يغطي كل الأفكار الرئيسية (إغلاق المحطات، الهدف المناخي، التوسع بالرياح، الطلب المتزايد، التحديات)، مع توثيق APA صحيح <code>(Obayashi, 2025)</code> في نهاية الجملة.<br>
+        <strong>d ✗</strong> — يكتب اسم الكاتبة كاملًا داخل الجملة "Yuka Obayashi (2025) reports..." بدل الصيغة المعتادة، وهذا أسلوب صحفي وليس توثيق APA أكاديمي قياسي.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Q2 ============ -->
+  <div class="q-card" id="q2">
+    <div class="q-head">
+      <h2><span class="q-num">2</span>التلخيص — الطاقة الشمسية من الفضاء</h2>
+      <span class="marks-pill">25 درجة</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q2">
+        <button class="play-btn" onclick="toggleNarration('q2')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+
+      <div class="q-instructions">📋 السؤال: Summarize the text in your own words with an APA style in-text citation. (Word limit: 90 words). (1×25 = 25 marks)</div>
+      <div class="original-text narratable" id="q2-step-0">
+        <span class="src-tag">📰 النص الأصلي — BBC</span>
+        <h4>Jonathan O'Callaghan — 01 November 2025</h4>
+        <p>Harvesting solar energy in orbit and transmitting it to Earth has long been an idea discussed by scientists. Now, several companies believe they are close to making it possible. In March this year, an unusual experiment took place at an American football stadium in Florida. Instead of footballs being thrown, beams of concentrated light were projected across the field of a stadium. These beams, lasting a few minutes, were directed from one side and captured on a screen on the other. The light, collected from the Sun, was projected using large 1.2-metre lenses positioned on the field, functioning like magnifying glasses. During the test, they successfully transmitted 100 watts of energy over a distance of about 105 metres.</p>
+        <p>Star Catcher is one among several companies around the world working on space-based solar power technologies, a concept that has remained uncertain for decades. The principle is to provide Earth with clean, abundant energy by capturing sunlight in space and transmitting it to the ground or to other satellites. Unlike solar panels on Earth, which are limited by weather, atmospheric filtering, and the day-night cycle, solar panels in space can collect sunlight almost continuously and at much higher efficiency. This approach offers a power density more than ten times greater than terrestrial systems, allowing for a much higher conversion of solar energy into electricity.</p>
+        <p>Space-based solar power operates on the same principle as terrestrial systems — converting sunlight into electricity — but with a crucial difference: the panels are positioned above the Earth's atmosphere. This means they can collect sunlight unfiltered by clouds or gases, which typically reflect about 30% and absorb around 25% of the Sun's energy before it reaches the surface.</p>
+        <p>Bringing such a concept to life poses significant challenges. Building large satellite constellations would be complex, potentially controversial, and would require multiple rocket launches. Moreover, other renewable energy sources are cheaper and quicker to deploy, which is crucial in addressing global warming and reducing dependence on fossil fuels. Despite these obstacles, advocates believe the benefits of constructing solar power stations in space will eventually outweigh the costs.</p>
+      </div>
+
+      <div class="method-box narratable" id="q2-step-1">
+        <div class="label">💡 طريقة سهلة تلخصين بيها أي نص حتى لو انجليزيتك متوسطة</div>
+        <ol>
+          <li><strong>اقرأي كل فقرة لحالها</strong> وحاولي تطلعين منها <span class="kw">فكرة واحدة فقط</span> بدون التفاصيل والأرقام الدقيقة. النص فيه 4 فقرات = يعني تقريبًا 4 أفكار رئيسية تجمعينهم.
+            <ul style="margin-top:6px;">
+              <li>فقرة 1: <span class="en">Star Catcher tested transmitting solar power on Earth (the experiment)</span></li>
+              <li>فقرة 2: <span class="en">space panels collect sunlight better than Earth panels</span></li>
+              <li>فقرة 3: <span class="en">space panels avoid clouds/atmosphere</span> (تفصيل إضافي — ممكن تدمجينها مع فقرة 2 أو تشيلينها لو وصلتي لـ90 كلمة)</li>
+              <li>فقرة 4: <span class="en">but there are challenges (cost, complexity, competition)</span></li>
+            </ul>
+          </li>
+          <li><strong>اكتبي جملة واحدة بسيطة لكل فكرة بكلماتك الخاصة</strong> — ما يحتاج جمل معقدة، حتى جملة قصيرة وصحيحة نحويًا أفضل من جملة طويلة منسوخة.</li>
+          <li><strong>اربطي الجمل</strong> بكلمات وصل سهلة مثل: <span class="en">"However"</span> (لكن)، <span class="en">"In addition"</span> (بالإضافة)، <span class="en">"As a result"</span> (نتيجة لذلك).</li>
+          <li><strong>عدّي الكلمات</strong> وتأكدي إنها قريبة من 90 (يُقبل عادة ±10 كلمات إلا إذا قال غير ذلك).</li>
+          <li><strong>ضيفي التوثيق</strong> بآخر الفقرة: إذا اسم الكاتب مذكور بالنص اكتبي بس <span class="en">(Author, Year)</span>، وإذا ذكرتي اسمه داخل الجملة مثل <span class="en">"O'Callaghan (2025) states that..."</span> ما تحتاجين تكررين السنة بالنهاية.</li>
+        </ol>
+      </div>
+
+      <div class="q-instructions" style="background:var(--ocean-soft); color:var(--ocean);">✍️ التلخيص النموذجي (بحد 90 كلمة تقريبًا):</div>
+      <div class="summary-essay narratable" id="q2-step-2" dir="ltr" style="text-align:left;">
+        Harvesting solar energy in space and beaming it to Earth is moving from theory toward reality. Star Catcher recently tested this, transmitting 100 watts of energy over 105 metres using large lenses at a Florida stadium. Unlike Earth-based panels, space solar panels collect sunlight continuously, unaffected by weather or the atmosphere, giving a power density over ten times greater than terrestrial systems. However, major challenges remain, including high costs, the complexity of building satellite constellations, and competition from cheaper, faster-to-deploy renewable sources on Earth (O'Callaghan, 2025).
+      </div>
+      <div class="word-count">✅ 86 كلمة — ضمن الحد المطلوب (90 كلمة)</div>
+      <div class="tip-box narratable" id="q2-step-3">
+        <div class="label">نصيحة مهمة</div>
+        لازم تكتب التلخيص <strong>بكلماتك الخاصة</strong> تمامًا، وما تستخدم نفس جُمل النص الأصلي. التوثيق هنا بصيغة <em>(Author, Year)</em> لأن اسم الكاتب لم يُذكر داخل الجملة. عدّل بالعدد الكلمات حسب اللي تكتبه أنت بالضبط — لازم يكون 90 كلمة أو قريب منها بحد أقصى/أدنى معقول.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Q3 ============ -->
+  <div class="q-card" id="q3">
+    <div class="q-head">
+      <h2><span class="q-num">3</span>Active and Passive — EcoWave Technologies</h2>
+      <span class="marks-pill">15 درجة</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q3">
+        <button class="play-btn" onclick="toggleNarration('q3')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+
+      <div class="q-instructions">📋 السؤال: Complete the text using the correct forms of the verbs in the brackets. (5×3 = 15 marks)</div>
+      <div class="original-text narratable" id="q3-step-0">
+        <span class="src-tag">📝 نص الفقرة الأصلي مع الفراغات</span>
+        <p>EcoWave Technologies is an emerging company in renewable energy innovation. The company <strong>(1) ________ (establish)</strong> in 2015 by a team of environmental scientists who wanted to create clean power from natural sources. Since its beginning, it <strong>(2) ________ (design)</strong> advanced wave-energy converters to produce electricity from ocean waves. Last year the company <strong>(3) ________ (install)</strong> these devices along several coastlines to test their efficiency and durability. Its latest product, the AquaGen system, <strong>(4) ________ (launch)</strong> last month and received excellent feedback from users and energy experts. The system is equipped with smart sensors that monitor wave strength and energy output in real time. Next year, new production facilities <strong>(5) ________ (build)</strong> in several coastal cities to meet the increasing demand for clean energy.</p>
+      </div>
+
+      <div class="method-box narratable" id="q3-step-1">
+        <div class="label">💡 خطوتين بس وتحلين أي سؤال Active/Passive</div>
+        <ol>
+          <li><strong>الخطوة الأولى — اسألي: مين سوى الفعل؟</strong><br>
+            اقرأي الجملة وحطي إصبعك على الفاعل (أول الجملة). اسألي: هل الفاعل هو اللي <span class="kw">سوّى</span> الفعل، أو هو اللي <span class="kw">انصار عليه</span> الفعل (تلقّاه)؟
+            <ul style="margin-top:6px;">
+              <li>مثال: <span class="en">"The company ___ (design)"</span> → الشركة هي اللي صممت (هي الفاعل الفعلي) → <strong>Active</strong> ✅</li>
+              <li>مثال: <span class="en">"The company ___ (establish)"</span> → الشركة ما أسست نفسها، <em>فريق علماء</em> أسسها → <strong>Passive</strong> ✅ (لازم نضيف was/were + التصريف الثالث)</li>
+            </ul>
+          </li>
+          <li><strong>الخطوة الثانية — حددي الزمن من كلمة بالجملة:</strong>
+            <ul style="margin-top:6px;">
+              <li><span class="kw">in 2015 / last year / last month</span> → زمن ماضي → <span class="en">was/were + V3</span> (passive) أو <span class="en">V2</span> (active)</li>
+              <li><span class="kw">Since its beginning</span> → "منذ" يدل على استمرارية من الماضي للحاضر → <span class="en">has/have + V3</span> (Present Perfect)</li>
+              <li><span class="kw">Next year</span> → المستقبل → <span class="en">will be + V3</span> (passive) أو <span class="en">will + V1</span> (active)</li>
+            </ul>
+          </li>
+          <li><strong>قاعدة تركيب الـ Passive دائمًا:</strong> <span class="en">be (مصرّف بالزمن المطلوب) + Verb 3 (Past Participle)</span>. مثلًا: <span class="en">is/was/will be + built/designed/launched</span>.</li>
+        </ol>
+      </div>
+
+      <div class="table-wrap">
+      <table class="fill">
+        <tr><th>#</th><th>الفعل الأصلي</th><th>الإجابة الصحيحة</th><th>الزمن المستخدم</th></tr>
+        <tr class="narratable" id="q3-step-2"><td>1</td><td>establish</td><td class="ans">was established</td><td>Passive — Past Simple</td></tr>
+        <tr class="narratable" id="q3-step-3"><td>2</td><td>design</td><td class="ans">has designed</td><td>Active — Present Perfect</td></tr>
+        <tr class="narratable" id="q3-step-4"><td>3</td><td>install</td><td class="ans">installed</td><td>Active — Past Simple</td></tr>
+        <tr class="narratable" id="q3-step-5"><td>4</td><td>launch</td><td class="ans">was launched</td><td>Passive — Past Simple</td></tr>
+        <tr class="narratable" id="q3-step-6"><td>5</td><td>build</td><td class="ans">will be built</td><td>Passive — Future Simple</td></tr>
+      </table>
+      </div>
+      <div class="why-box narratable" id="q3-step-7">
+        <div class="label">تطبيق القاعدة على كل فعل بالنص</div>
+        اسأل نفسك: <strong>من يقوم بالفعل؟</strong> إذا الفاعل واضح ويقوم بالفعل بنفسه (الشركة صممت، الشركة ركّبت) نستخدم <em>Active</em>. إذا الفاعل (الشيء) يتلقى الفعل ولا يقوم به (الشركة "أُسست" من قبل فريق، النظام "تم إطلاقه") نستخدم <em>Passive</em>. كلمات مثل "last year/last month" = Past Simple، و"next year" = Future، و"since" = Present Perfect.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Q4 ============ -->
+  <div class="q-card" id="q4">
+    <div class="q-head">
+      <h2><span class="q-num">4</span>مطابقة العناوين — Jobs in the Past and the Future</h2>
+      <span class="marks-pill">15 درجة</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q4">
+        <button class="play-btn" onclick="toggleNarration('q4')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+
+      <div class="q-instructions">📋 السؤال: Choose an appropriate heading for each paragraph. There is an extra heading. (5×3 = 15 marks)</div>
+      <div class="original-text narratable" id="q4-step-0">
+        <span class="src-tag">📖 نص القراءة الكامل — Jobs in the Past and the Future</span>
+        <h4>Jobs in the Past and the Future: The Transformative Role of Technology</h4>
+        <p id="q4-para-a"><strong>A.</strong> Work and employment have undergone profound evolutions throughout human history, shaped largely by technological innovation. From the Industrial Revolution to the digital era, technology has continuously redefined how, where, and why people work. Comparing jobs of the past with those likely to exist in the future reveals a pattern of disruption, adaptation, and creation, in which technology acts as both a destroyer of traditional roles and a creator of new opportunities. The rapid development of artificial intelligence (AI), automation, robotics, and digital communication tools will continue to alter the global labour landscape, influencing not only the nature of work but also the skills required to remain employable.</p>
+        <p id="q4-para-b"><strong>B.</strong> Historically, most jobs were physical and routine in nature. During the agricultural and early industrial periods, work relied heavily on manual labour. Farmers, factory workers, and craftsmen formed the backbone of the economy. These roles demanded endurance and craftsmanship rather than cognitive or digital skills. Communication was slow, work was often local, and opportunities for collaboration across borders were limited. Even as the twentieth century introduced mechanisation and assembly lines, workers still needed to perform repetitive tasks, often in fixed locations. Employment was relatively stable, and career progression followed predictable patterns within specific industries.</p>
+        <p id="q4-para-c"><strong>C.</strong> However, the late twentieth and early twenty-first centuries witnessed an extraordinary acceleration in technological change. Computers, the internet, and mobile communication reshaped not only business operations but also the expectations of employees and consumers. Jobs that once required face-to-face interaction or manual data entry became automated or digitised. For instance, the rise of word processors replaced typists, while computerised accounting systems reduced the need for clerical staff. At the same time, technology generated new employment sectors—such as software development, information technology support, and digital marketing—that were unimaginable a few decades earlier. These transformations marked a shift from an industrial economy to a knowledge- and service-based economy.</p>
+        <p id="q4-para-d"><strong>D.</strong> Looking forward, technology will continue to revolutionise the world of work, but the direction of change will be even more complex. Artificial intelligence and automation are expected to take over a wide range of repetitive cognitive and physical tasks. Self-driving vehicles may reduce the need for drivers, while AI-powered diagnostic tools could transform healthcare professions. Similarly, robotic process automation will likely replace many back-office roles in finance, logistics, and customer service. As a result, many traditional jobs may disappear or require significant reskilling. According to recent labour studies, up to one-third of existing jobs may be automated by 2030, though the exact impact will vary across regions and sectors.</p>
+        <p id="q4-para-e"><strong>E.</strong> At the same time, the future will bring entirely novel jobs that demand creativity, emotional intelligence, and complex problem-solving—qualities that machines cannot easily replicate. Professions in fields such as data science, cybersecurity, renewable energy, biotechnology, and AI ethics will expand dramatically. Moreover, remote and hybrid work models, supported by digital collaboration tools, will make work more flexible and globalised. The future workforce will not only need technical expertise but also adaptability, critical thinking, and lifelong learning skills to navigate continuous change.</p>
+        <p id="q4-para-f"><strong>F.</strong> Technological change also raises important social and ethical questions. While automation can enhance productivity and reduce human error, it can also increase inequality if opportunities for reskilling and education are not distributed fairly. Workers in low-income or routine jobs are at higher risk of displacement, whereas those with advanced digital skills may benefit the most. Policymakers and educational institutions therefore have a crucial role in ensuring that technological progress leads to inclusive growth. Investment in digital literacy, vocational training, and human-centred design will be essential to balance efficiency with equity. While the future of work will undoubtedly be shaped by automation and artificial intelligence, the human elements such as creativity, empathy, and moral judgment will remain indispensable.</p>
+      </div>
+      <div class="q-instructions" style="background:var(--ocean-soft); color:var(--ocean);">قائمة العناوين المتاحة: I. Work in the past — II. Changing nature of jobs — III. Automation and the future — IV. New skills and opportunities — V. Ethical challenges of technology — VI. The digital shift</div>
+
+      <div class="method-box narratable" id="q4-step-1">
+        <div class="label">💡 ما تحتاجين تقرين الفقرة كاملة! جربي هذي الطريقة السريعة</div>
+        <ol>
+          <li><strong>اقرأي بس الجملة الأولى من كل فقرة</strong> — في 90% من النصوص الأكاديمية، الجملة الأولى تقول لك فكرة الفقرة كاملة. مثلًا فقرة B تبدأ بـ <span class="en">"Historically, most jobs were physical..."</span> → كلمة <span class="en">Historically</span> (تاريخيًا) وحدها تخبرك إنها عن الماضي.</li>
+          <li><strong>دوّري على كلمة مفتاحية متكررة بالفقرة</strong> ثم طابقيها بنفس الكلمة أو معناها بالعناوين:
+            <ul style="margin-top:6px;">
+              <li>فقرة فيها <span class="en">"computers, internet, digitised"</span> كثير → العنوان فيه كلمة <span class="en">"digital"</span> (فقرة C → The digital shift)</li>
+              <li>فقرة فيها <span class="en">"AI, automation"</span> بشكل متكرر → العنوان فيه <span class="en">"Automation"</span> (فقرة D)</li>
+              <li>فقرة فيها <span class="en">"new skills, creativity, adaptability"</span> → العنوان فيه <span class="en">"New skills"</span> (فقرة E)</li>
+            </ul>
+          </li>
+          <li><strong>اشطبي العنوان بعد ما تستخدمينه</strong> عشان ما تكررينه بالغلط بفقرة ثانية — كل عنوان يُستخدم مرة واحدة فقط (إلا الزائد، يبقى بدون استخدام).</li>
+          <li><strong>آخر خطوة:</strong> اللي يتبقى من العناوين بدون فقرة = هو "العنوان الزائد" المطلوب تجاهله.</li>
+        </ol>
+      </div>
+
+      <div class="heading-match narratable" id="q4-step-2"><span>Paragraph A <span class="para-tag">مقدمة عامة</span></span><span>II. Changing nature of jobs</span></div>
+      <div class="heading-match narratable" id="q4-step-3"><span>Paragraph B <span class="para-tag">العمل اليدوي قديمًا</span></span><span>I. Work in the past</span></div>
+      <div class="heading-match narratable" id="q4-step-4"><span>Paragraph C <span class="para-tag">الكمبيوتر والإنترنت</span></span><span>VI. The digital shift</span></div>
+      <div class="heading-match narratable" id="q4-step-5"><span>Paragraph D <span class="para-tag">الذكاء الاصطناعي والأتمتة</span></span><span>III. Automation and the future</span></div>
+      <div class="heading-match narratable" id="q4-step-6"><span>Paragraph E <span class="para-tag">مهارات المستقبل</span></span><span>IV. New skills and opportunities</span></div>
+      <div class="heading-match extra narratable" id="q4-step-7">⚠️ العنوان الزائد (غير مستخدم): <strong>V. Ethical challenges of technology</strong> — وهذا فعليًا عنوان الفقرة F التي لم يُطلب تصنيفها في السؤال.</div>
+    </div>
+  </div>
+
+  <!-- ============ Q5 ============ -->
+  <div class="q-card" id="q5">
+    <div class="q-head">
+      <h2><span class="q-num">5</span>المفردات — مطابقة التعريف بالكلمة</h2>
+      <span class="marks-pill">10 درجات</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q5">
+        <button class="play-btn" onclick="toggleNarration('q5')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+
+      <div class="q-instructions">📋 السؤال: Match each definition with the correct word from the text. (Use 5 from 6 words in bold). (5×2 = 10 marks)</div>
+      <div class="q-instructions narratable" id="q5-step-0" style="background:var(--ocean-soft); color:var(--ocean);">📖 الكلمات الست الغامقة في نص "Jobs in the Past and the Future" (نفس نص سؤال 4): creator — endurance — expectations — significant — crucial — collaboration</div>
+
+      <div class="method-box narratable" id="q5-step-1">
+        <div class="label">💡 طريقة الاستبعاد — أسهل من حفظ معاني الكلمات</div>
+        <ol>
+          <li><strong>اقسمي الكلمات الست إلى مجموعات حسب الشكل:</strong> كلمتين تنتهيان بنفس الحروف غالبًا متشابهتين بالمعنى تقريبًا — <span class="en">significant</span> و<span class="en">crucial</span> كلاهما معناه "مهم"، بس وحدة أقوى من الثانية (crucial = أهم/أخطر، significant = مهم وملاحظ).</li>
+          <li><strong>ابدئي بأوضح تعريف وأسهل كلمة أول:</strong> "working together" واضح إنها <span class="en">collaboration</span> لأنها أقرب كلمة بالشكل لكلمة "collaborate" (يتعاون) اللي يعرفها أغلب الطلاب.</li>
+          <li><strong>اشطبي الكلمة بعد استخدامها</strong> من قائمتك، عشان ما تكررين نفس الكلمة بإجابتين مختلفتين بالغلط.</li>
+          <li><strong>قارني بين الكلمتين المتشابهتين بالنهاية:</strong> "extremely important" (أقوى تعبير) = <span class="en">crucial</span>، أما "important or noticeable" (أخف بشوي وفيه معنى "يُلاحظ") = <span class="en">significant</span>.</li>
+          <li><strong>الكلمة الباقية بدون تعريف</strong> هي "الكلمة الزائدة" المطلوب تجاهلها.</li>
+        </ol>
+      </div>
+
+      <div class="vocab-row narratable" id="q5-step-2"><span>6. beliefs about what will happen</span><span class="word">expectations</span></div>
+      <div class="vocab-row narratable" id="q5-step-3"><span>7. the ability to continue doing something for a long time</span><span class="word">endurance</span></div>
+      <div class="vocab-row narratable" id="q5-step-4"><span>8. extremely important</span><span class="word">crucial</span></div>
+      <div class="vocab-row narratable" id="q5-step-5"><span>9. important or noticeable</span><span class="word">significant</span></div>
+      <div class="vocab-row narratable" id="q5-step-6"><span>10. working together with others to achieve something</span><span class="word">collaboration</span></div>
+      <div class="tip-box narratable" id="q5-step-7" style="margin-top:14px;">
+        <div class="label">الكلمة الزائدة</div>
+        من بين 6 كلمات بالنص (endurance, expectations, significant, crucial, collaboration, creator) — كلمة <strong>"creator"</strong> هي الزائدة وغير المستخدمة في هذا السؤال.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Q6 ============ -->
+  <div class="q-card" id="q6">
+    <div class="q-head">
+      <h2><span class="q-num">6</span>أسئلة قصيرة — لا تزيد عن 10 كلمات</h2>
+      <span class="marks-pill">25 درجة</span>
+    </div>
+    <div class="q-body">
+
+      <div class="voice-bar" data-question="q6">
+        <button class="play-btn" onclick="toggleNarration('q6')" aria-label="تشغيل الشرح الصوتي">▶</button>
+        <div class="voice-status">اضغطي تشغيل لسماع شرح هذا السؤال<span class="lang-tag ar">🎧 عربي</span></div>
+        <div class="voice-progress"></div>
+        <button class="stop-btn" onclick="stopNarration()">⏹ إيقاف</button>
+      </div>
+
+      <div class="q-instructions">📋 السؤال: Answer the questions in not more than 10 words. (5×5 = 25 marks) — بناءً على نص "Jobs in the Past and the Future" (نفس نص سؤال 4)</div>
+
+      <div class="method-box narratable" id="q6-step-0">
+        <div class="label">💡 خطوة واحدة تحل كل الأسئلة القصيرة: ابحثي عن "الكلمة المشتركة"</div>
+        <ol>
+          <li><strong>خذي الكلمة المفتاحية من السؤال نفسه</strong> ودوّري عليها بالضبط بنص القراءة (سؤال 4) — الجواب يكون قريب منها مباشرة، غالبًا بنفس الفقرة.
+            <ul style="margin-top:6px;">
+              <li>السؤال فيه <span class="en">"stable and predictable"</span>؟ → دوّري بالنص على كلمة <span class="en">"stable"</span> → تجدينها بفقرة B بالضبط.</li>
+              <li>السؤال فيه <span class="en">"by 2030"</span>؟ → دوّري على رقم <span class="en">"2030"</span> بالنص → موجود بفقرة D.</li>
+            </ul>
+          </li>
+          <li><strong>اقرأي الجملة اللي فيها الكلمة + الجملة قبلها وبعدها</strong> فقط (ما تحتاجين الفقرة كاملة).</li>
+          <li><strong>لخّصي تلك الجملة بأقل من 10 كلمات</strong> بصياغتك، بدون تكرار السؤال نفسه بإجابتك.</li>
+          <li><strong>تجنبي:</strong> الإجابة بجملة طويلة منسوخة بالكامل من النص (راح تتجاوزين حد الـ10 كلمات وتخصم درجات).</li>
+        </ol>
+      </div>
+
+      <div class="short-q narratable" id="q6-step-1">
+        <div class="q">11. Why were jobs in the past considered stable and predictable?</div>
+        <div class="a">Because work followed fixed routines within specific industries.</div>
+      </div>
+      <div class="short-q narratable" id="q6-step-2">
+        <div class="q">12. How did digital technology change the structure of employment sectors?</div>
+        <div class="a">It automated old jobs and created new tech-based sectors.</div>
+      </div>
+      <div class="short-q narratable" id="q6-step-3">
+        <div class="q">13. What does the text predict about automation's effect on employment by 2030?</div>
+        <div class="a">Up to one-third of existing jobs may be automated.</div>
+      </div>
+      <div class="short-q narratable" id="q6-step-4">
+        <div class="q">14. Why will human qualities remain essential in future workplaces?</div>
+        <div class="a">Because machines cannot replicate creativity, empathy, and moral judgment.</div>
+      </div>
+      <div class="short-q narratable" id="q6-step-5">
+        <div class="q">15. What responsibility do policymakers have in managing technological change?</div>
+        <div class="a">Ensuring fair reskilling and education for inclusive growth.</div>
+      </div>
+      <div class="why-box narratable" id="q6-step-6">
+        <div class="label">ملاحظة</div>
+        كل إجابة هنا أقل من 10 كلمات وتعتمد مباشرة على جملة موجودة بنص الفقرة المرتبطة بها — أسلوب جيد لتفادي خسارة الدرجات بالأسئلة القصيرة.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    بالتوفيق في اختبارك! 🌊☀️
+    <div class="by-line">BY REEM AL MOQBALI</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   نظام الشرح الصوتي التفاعلي
+   كل سؤال له مصفوفة خطوات: كل خطوة فيها نص (عربي أو إنجليزي)
+   ومُعرّف العنصر اللي يتحدد (highlight) وقت الكلام عنه
+   ============================================================ */
+
+const narrations = {
+
+  q1: [
+    { id:'q1-step-0', lang:'ar-SA', cls:'lang-ar', text:"يلا نبدأ! هذا خبر من رويترز عن شركة جي باور اليابانية. بصراحة ما يهمنا نقرا كل سطر، إحنا محققين، نبحث عن أفضل تلخيص." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"خليني أعطيك السر: ركزي بس على ثلاث أسئلة. مين الشركة؟ وش سوّت؟ وليش سوّت كذا؟ هذا كافي تمامًا." },
+    { id:'q1-step-1', lang:'ar-SA', cls:'lang-ar', text:"تعالي نشوف الخيار أ. يقول إن الشركة بتتعاون مع شركاء أوروبيين وعرب." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"وقفة! هذي المعلومة مو موجودة بالنص الأصلي خالص! يعني إحنا أمام خيار مختلق، شيليه من القائمة فورًا." },
+    { id:'q1-step-2', lang:'ar-SA', cls:'lang-ar', text:"طيب خل ننتقل للخيار ب." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذا الخيار، يا حلو، نسخ جمل كاملة من النص الأصلي حرف بحرف! وهذا نسخ ولصق مو تلخيص، فهو مستبعد كذلك." },
+    { id:'q1-step-3', lang:'ar-SA', cls:'lang-ar', text:"وعندنا الخيار د." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذا كتب اسم الكاتبة كامل داخل الجملة، وهذا أسلوب الصحف، مو توثيق آيبيايه أكاديمي زي ما نتعلمه بالجامعة. فهو مستبعد أيضًا." },
+    { id:'q1-step-4', lang:'ar-SA', cls:'lang-ar', text:"وبكذا، ما بقى إلا الخيار سي!" },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"وفعلًا هذا أحسنهم. صياغة جديدة، يغطي كل الأفكار المهمة، وما زاد ولا نقص شي، وختمها بتوثيق آيبيايه صحيح بالضبط." },
+    { id:'q1-step-6', lang:'ar-SA', cls:'lang-ar correct', text:"وهكذا، الإجابة الصحيحة هي الخيار سي. سهلة صح؟" },
+    { id:'q1-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"وخلاصة السبب: لأنه الوحيد اللي يعيد صياغة الفكرة بكلمات جديدة، يحافظ على كل المعلومات الصحيحة، وما يضيف أي حاجة غريبة، وفيه توثيق سليم. وخلصنا أول سؤال!" }
+  ],
+
+  q2: [
+    { id:'q2-step-0', lang:'ar-SA', cls:'lang-ar', text:"الحين عندنا تحدي أكبر شوي، نص طويل من بي بي سي عن جمع الطاقة الشمسية بالفضاء. بس لا تخافين، فيه طريقة بسيطة جدًا نلخصه بيها." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"السر هو: ما تقرين النص كأنه قصة، اقريه كأنه أربع صناديق، وكل صندوق فيه فكرة وحدة بس." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"الصندوق الأول عن تجربة شركة ستار كاتشر. الثاني والثالث عن مميزات الألواح الشمسية بالفضاء، إنها تجمع الضوء أحسن. والرابع عن التحديات والتكلفة." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"اكتبي جملة وحدة بسيطة لكل صندوق، وربطيهم بكلمات زي هاوإيفر ومعناها لكن، وخلاص! تلخيص جاهز بدون لخبطة." },
+    { id:'q2-step-2', lang:'ar-SA', cls:'lang-ar correct', text:"وهذا التلخيص النموذجي. جمع الطاقة الشمسية بالفضاء وإرسالها للأرض صار قريب من الواقع، بعد إنه كان فكرة نظرية بس. شركة ستار كاتشر جربت هذا، ونقلت طاقة بقدرة مئة واط لمسافة مئة وخمسة أمتار، باستخدام عدسات كبيرة بملعب فلوريدا. والألواح الشمسية بالفضاء تجمع ضوء الشمس باستمرار، بعكس الألواح الأرضية، وتعطي كثافة طاقة أعلى بعشر مرات تقريبًا. لكن، فيه تحديات كبيرة، منها التكلفة العالية، وتعقيد بناء الأقمار الصناعية، ومنافسة مصادر الطاقة المتجددة الأرضية الأرخص والأسرع." },
+    { id:'q2-step-3', lang:'ar-SA', cls:'lang-ar correct', text:"شوفي معاي، هذا التلخيص بكلمات جديدة بالكامل، عدد كلماته ستة وثمانين كلمة بالضبط، يعني بالضبط ضمن حد التسعين كلمة المطلوب، وفيه توثيق صحيح بالنهاية. تلخيص يستاهل علامة كاملة!" }
+  ],
+
+  q3: [
+    { id:'q3-step-0', lang:'ar-SA', cls:'lang-ar', text:"هذا سؤال يحبه كثير من الطلاب، لأنه بس خطوتين وخلاص! عندنا شركة إيكو ويف، وخمس فراغات نعبيها." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"الخطوة الأولى: اسألي نفسك مين سوّى الفعل؟ والخطوة الثانية: شوفي كلمة بالجملة تدلك على الزمن. بس كذا!" },
+    { id:'q3-step-2', lang:'ar-SA', cls:'lang-ar', text:"خل نبدأ بالفراغ الأول." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"فكري معاي: الشركة أسست نفسها بنفسها؟ لا! فريق علماء هم اللي أسسوها. يعني الشركة استقبلت الفعل، فهذا باسيف. وكلمة في عام ألفين وخمستعشر تخبرنا إنه زمن ماضي." },
+    { id:'q3-step-3', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الثاني." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هنا الشركة هي اللي صممت بنفسها، يعني أكتيف. وكلمة سينس يعني منذ، تدل على شي مستمر من الماضي للحاضر." },
+    { id:'q3-step-4', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الثالث." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"الشركة ركّبت الأجهزة بنفسها، فهذا أكتيف، وكلمة لاست يير يعني العام الماضي تدل على ماضي بسيط." },
+    { id:'q3-step-5', lang:'ar-SA', cls:'lang-ar', text:"والفراغ الرابع." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"النظام ما أطلق نفسه، الشركة هي اللي أطلقته. يعني باسيف، وكلمة لاست مونث تدل على ماضي بسيط أيضًا." },
+    { id:'q3-step-6', lang:'ar-SA', cls:'lang-ar', text:"وآخر فراغ، الخامس." },
+    { id:'q3-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"المصانع ما تبني نفسها بنفسها، فهذا باسيف، وكلمة نكست يير يعني العام القادم تدل على المستقبل. وبكذا حلينا الخمس فراغات بنفس الطريقة بالضبط، سهلة مرة!" }
+  ],
+
+  q4: [
+    { id:'q4-para-a', lang:'ar-SA', cls:'lang-ar', text:"الفقرة أ هذي مقدمة عامة بس، تمهّد للموضوع كامل عن تغيّر طبيعة الوظائف بسبب التكنولوجيا." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها الأنسب هو تغيّر طبيعة الوظائف، لأنها بتكلم عن الموضوع بشكل عام." },
+    { id:'q4-para-b', lang:'ar-SA', cls:'lang-ar', text:"وشوفي الفقرة ب، أول كلمة فيها هيستوريكلي، يعني تاريخيًا! هذي وحدها كفاية تخبرك بكل شي." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها طبعًا العمل في الماضي، ما يحتاج تفكير زيادة." },
+    { id:'q4-para-c', lang:'ar-SA', cls:'lang-ar', text:"والفقرة سي تتكلم عن الكمبيوتر والإنترنت وكيف غيّروا طريقة العمل." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"كلمة ديجيتال تتكرر كثير هنا، فعنوانها المناسب هو التحول الرقمي." },
+    { id:'q4-para-d', lang:'ar-SA', cls:'lang-ar', text:"والفقرة دي عن الذكاء الاصطناعي والأتمتة بالمستقبل، واضحة من أول جملة." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها الأتمتة والمستقبل، منطقي جدًا." },
+    { id:'q4-para-e', lang:'ar-SA', cls:'lang-ar', text:"وآخر فقرة عندنا، إي، تتكلم عن وظائف جديدة تحتاج إبداع ومهارات تكيّف." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"فعنوانها مهارات وفرص جديدة، تمام؟" },
+    { id:'q4-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"وآخر شي، العنوان اللي ما استخدمناه أبدًا هو التحديات الأخلاقية للتكنولوجيا، وهذا عنوان الفقرة إف اللي السؤال ما طلب منا نحطها أصلًا، فهو عنوانها الزائد. وخلصنا!" }
+  ],
+
+  q5: [
+    { id:'q5-step-0', lang:'ar-SA', cls:'lang-ar', text:"عندنا ست كلمات بالنص لازم نطابقها مع تعريفاتها. بس خلينا صريحين، ما نحتاج نحفظ كل الكلمات، فيه طريقة أذكى من هذا." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"دايمًا ابدئي بأوضح كلمة، الكلمة اللي ما تحتاج تفكير." },
+    { id:'q5-step-6', lang:'ar-SA', cls:'lang-ar', text:"شوفي التعريف العاشر: العمل مع الآخرين لتحقيق هدف مشترك." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذي بديهية! الكلمة اللي تشبه فعل التعاون، تعرفينها من شكلها مباشرة." },
+    { id:'q5-step-2', lang:'ar-SA', cls:'lang-ar', text:"والتعريف السادس: توقعات حول ما سيحدث بالمستقبل." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"كلمة التوقعات بالإنجليزي، سهلة لو ركزتي." },
+    { id:'q5-step-3', lang:'ar-SA', cls:'lang-ar', text:"والتعريف السابع: القدرة على الاستمرار بشي لمدة طويلة." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذي كلمة التحمّل، تخص الصبر والثبات." },
+    { id:'q5-step-4', lang:'ar-SA', cls:'lang-ar', text:"والتعريف الثامن: مهم جدًا جدًا، تعبير قوي." },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"إذا التعبير قوي ومبالغ فيه، فالكلمة هي بالغ الأهمية، الأقوى من بين كلمتين متشابهتين." },
+    { id:'q5-step-5', lang:'ar-SA', cls:'lang-ar', text:"وآخر تعريف، التاسع: مهم أو ملحوظ، بس أخف من السابقة." },
+    { id:'q5-step-5', lang:'ar-SA', cls:'lang-ar correct', text:"هذي الكلمة الأخف هي مهم وملحوظ بالإنجليزي، أخف شوي من بالغ الأهمية." },
+    { id:'q5-step-7', lang:'ar-SA', cls:'lang-ar correct', text:"وشوفي، بقت كلمة وحدة بدون تعريف، وهي كلمة المُبتكِر بالإنجليزي، وهذي هي الكلمة الزائدة اللي نتجاهلها بكل ثقة. خلصنا!" }
+  ],
+
+  q6: [
+    { id:'q6-step-1', lang:'ar-SA', cls:'lang-ar', text:"يلا نبدأ بآخر سؤال، خمس أسئلة قصيرة بس. أول سؤال: ليش كانت الوظائف بالماضي مستقرة وثابتة؟" },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"السر هنا، دوّري على كلمة مستقرة بالفقرة اللي تتكلم عن الماضي، وراح تلاقين الجواب جنبها تمامًا." },
+    { id:'q6-step-1', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: لأن العمل كان يتبع أنظمة وروتين ثابت داخل صناعات محددة." },
+    { id:'q6-step-2', lang:'ar-SA', cls:'lang-ar', text:"والسؤال الثاني: كيف غيّرت التكنولوجيا الرقمية قطاعات العمل؟" },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"هذا مرتبط بالفقرة اللي تتكلم عن الكمبيوتر والإنترنت، اللي أزالت وظائف قديمة وفتحت قطاعات جديدة كليًا." },
+    { id:'q6-step-2', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: أتمتت وظائف قديمة، وأنشأت قطاعات تقنية جديدة بالكامل." },
+    { id:'q6-step-3', lang:'ar-SA', cls:'lang-ar', text:"والسؤال الثالث: وش يتوقع النص عن تأثير الأتمتة بحلول عام 2030؟" },
+    { id:null, lang:'ar-SA', cls:'lang-ar', text:"دوّري على الرقم نفسه، 2030، بالفقرة اللي تتكلم عن المستقبل، وراح تلاقين الإحصائية جنبها مباشرة." },
+    { id:'q6-step-3', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: من المتوقع أن يُؤتمت ثلث الوظائف الحالية تقريبًا." },
+    { id:'q6-step-4', lang:'ar-SA', cls:'lang-ar', text:"والسؤال الرابع: ليش تبقى الصفات البشرية مهمة بمكان العمل بالمستقبل؟" },
+    { id:'q6-step-4', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: لأن الآلات ببساطة ما تقدر تقلّد الإبداع، ولا التعاطف، ولا الحكم الأخلاقي." },
+    { id:'q6-step-5', lang:'ar-SA', cls:'lang-ar', text:"وآخر سؤال، الخامس: وش مسؤولية صنّاع القرار بإدارة هذا التغيير التقني؟" },
+    { id:'q6-step-5', lang:'ar-SA', cls:'lang-ar correct', text:"والجواب: ضمان إعادة تأهيل عادلة، وتعليم يحقق نمو شامل للجميع." },
+    { id:'q6-step-6', lang:'ar-SA', cls:'lang-ar correct', text:"وشوفي شي حلو، كل إجابة من هذي أقل من عشر كلمات، ومبنية مباشرة على جملة موجودة بنص الفقرة. وبكذا خلصنا الاختبار كامل، أحسنتِ!" }
+  ]
+};
+
+let currentStepIndex = 0;
+let currentQuestionId = null;
+let isPlaying = false;
+let cachedVoices = [];
+let resumeInterval = null;
+let voicesChangedHandler = null;
+
+function refreshVoices(){
+  if(!('speechSynthesis' in window)) return [];
+  cachedVoices = window.speechSynthesis.getVoices() || [];
+  console.log('[refreshVoices] count=', cachedVoices.length,
+    cachedVoices.map(v => v.name + ' (' + v.lang + ')').join(', ') || '(none)');
+  return cachedVoices;
+}
+
+if('speechSynthesis' in window){
+  refreshVoices();
+  window.speechSynthesis.onvoiceschanged = () => {
+    console.log('[voiceschanged] fired');
+    refreshVoices();
+    if(voicesChangedHandler){
+      const fn = voicesChangedHandler;
+      voicesChangedHandler = null;
+      fn();
+    }
+  };
+} else {
+  document.querySelectorAll('.no-voice-msg').forEach(el => el.style.display='block');
+  document.querySelectorAll('.play-btn').forEach(btn => btn.disabled = true);
+}
+
+function getVoices(){
+  const live = refreshVoices();
+  return live.length ? live : cachedVoices;
+}
+
+function pickVoice(langPrefix){
+  const voices = getVoices();
+  if(!voices.length) return null;
+  let v = voices.find(x => x.lang === langPrefix);
+  if(!v && langPrefix && langPrefix.toLowerCase().startsWith('ar')){
+    v = voices.find(x => x.lang && x.lang.toLowerCase().startsWith('ar'));
+  }
+  if(!v) v = voices.find(x => x.default);
+  if(!v) v = voices.find(x => x.localService);
+  v = v || voices[0];
+  console.log('[pickVoice] langPrefix=', langPrefix, '→', v ? v.name + ' (' + v.lang + ')' : 'none');
+  return v;
+}
+
+function keepSpeechAlive(){
+  if(resumeInterval) return;
+  resumeInterval = setInterval(() => {
+    if(window.speechSynthesis.speaking){
+      window.speechSynthesis.resume();
+    } else {
+      clearInterval(resumeInterval);
+      resumeInterval = null;
+    }
+  }, 120);
+}
+
+function waitForVoices(maxMs){
+  return new Promise(resolve => {
+    if(getVoices().length > 0){
+      resolve(getVoices());
+      return;
+    }
+    let done = false;
+    const finish = () => {
+      if(done) return;
+      done = true;
+      voicesChangedHandler = null;
+      resolve(getVoices());
+    };
+    voicesChangedHandler = finish;
+    setTimeout(finish, maxMs || 500);
+  });
+}
+
+function clearHighlights(){
+  document.querySelectorAll('.narratable.speaking').forEach(el=>{
+    el.classList.remove('speaking','lang-ar','lang-correct');
+  });
+}
+
+function buildProgressDots(qid, steps){
+  const bar = document.querySelector(`.voice-bar[data-question="${qid}"] .voice-progress`);
+  bar.innerHTML = '';
+  steps.forEach((s,i)=>{
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.dataset.idx = i;
+    bar.appendChild(d);
+  });
+}
+
+function updateProgressDots(qid, idx){
+  const dots = document.querySelectorAll(`.voice-bar[data-question="${qid}"] .voice-progress .dot`);
+  dots.forEach((d,i)=>{
+    d.classList.remove('active','done');
+    if(i < idx) d.classList.add('done');
+    if(i === idx) d.classList.add('active');
+  });
+}
+
+function setStatus(qid, text){
+  const status = document.querySelector(`.voice-bar[data-question="${qid}"] .voice-status`);
+  status.innerHTML = text + `<span class="lang-tag ar">🎧 عربي</span>`;
+}
+
+function scrollToStep(el){
+  if(!el) return;
+  const rect = el.getBoundingClientRect();
+  const offset = window.innerHeight * 0.35;
+  window.scrollTo({ top: window.scrollY + rect.top - offset, behavior:'smooth' });
+}
+
+function speakStep(qid, idx, fromUserGesture){
+  console.log('[speakStep] start', { qid, idx, fromUserGesture, isPlaying, speaking: window.speechSynthesis?.speaking });
+
+  const steps = narrations[qid];
+  if(idx >= steps.length){
+    console.log('[speakStep] done — all steps finished');
+    finishNarration(qid);
+    return;
+  }
+  currentStepIndex = idx;
+  updateProgressDots(qid, idx);
+
+  const step = steps[idx];
+  clearHighlights();
+
+  if(step.id){
+    const el = document.getElementById(step.id);
+    if(el){
+      el.classList.add('speaking');
+      if(step.cls.includes('ar')) el.classList.add('lang-ar');
+      if(step.cls.includes('correct')) el.classList.add('lang-correct');
+      scrollToStep(el);
+    }
+  }
+
+  setStatus(qid, 'تشرح الآن…');
+
+  const utter = new SpeechSynthesisUtterance(step.text);
+  const voice = pickVoice(step.lang);
+  if(voice){
+    utter.voice = voice;
+    utter.lang = voice.lang;
+  } else {
+    utter.lang = step.lang;
+  }
+  utter.rate = 0.82;
+  utter.pitch = 0.95;
+  utter.volume = 1;
+
+  let advanced = false;
+  const goNext = () => {
+    if(advanced) return;
+    advanced = true;
+    console.log('[speakStep] goNext', idx);
+    if(currentQuestionId === qid && isPlaying){
+      setTimeout(() => speakStep(qid, idx + 1, false), 550);
+    }
+  };
+
+  utter.onstart = () => console.log('[speakStep] onstart', idx, utter.voice?.name || 'default');
+  utter.onend = () => { console.log('[speakStep] onend', idx); goNext(); };
+  utter.onerror = (e) => {
+    console.warn('[speakStep] onerror', idx, e.error);
+    if(e.error !== 'interrupted') goNext();
+  };
+
+  const estMs = Math.max(2500, step.text.length * 110);
+  setTimeout(() => { if(!advanced) goNext(); }, estMs);
+
+  try{
+    if(fromUserGesture){
+      console.log('[speakStep] first speak in user gesture — no cancel before speak');
+    } else if(window.speechSynthesis.speaking || window.speechSynthesis.pending){
+      console.log('[speakStep] cancel previous queue before next step');
+      window.speechSynthesis.cancel();
+    }
+    keepSpeechAlive();
+    console.log('[speakStep] before speak()', { idx, voice: utter.voice?.name, lang: utter.lang, textLen: step.text.length });
+    window.speechSynthesis.speak(utter);
+    console.log('[speakStep] after speak()', { speaking: window.speechSynthesis.speaking, pending: window.speechSynthesis.pending, paused: window.speechSynthesis.paused });
+  }catch(e){
+    console.warn('[speakStep] speak() threw', e);
+    goNext();
+  }
+}
+
+function finishNarration(qid){
+  isPlaying = false;
+  currentQuestionId = null;
+  clearHighlights();
+  updateProgressDots(qid, -1);
+  setStatus(qid, '✅ خلصنا الشرح! تقدرين تعيدين التشغيل');
+  const btn = document.querySelector(`.voice-bar[data-question="${qid}"] .play-btn`);
+  btn.textContent = '▶';
+  btn.classList.remove('playing');
+  document.querySelector(`.voice-bar[data-question="${qid}"] .stop-btn`).classList.remove('show');
+}
+
+function testVoice(){
+  console.log('[testVoice] start');
+  const resultEl = document.getElementById('test-voice-result');
+  if(!('speechSynthesis' in window)){
+    resultEl.textContent = '❌ متصفحك ما يدعم الأصوات أبدًا. جرّبي Chrome.';
+    resultEl.style.color = 'var(--coral)';
+    return;
+  }
+
+  const voices = getVoices();
+  const arVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar'));
+  const voice = pickVoice('ar-SA');
+  resultEl.textContent = voices.length
+    ? `🔎 عدد الأصوات: ${voices.length}${arVoice ? '' : ' (ما فيه عربي — بنستخدم أي صوت متاح)'}`
+    : '⏳ يحمّل قائمة الأصوات…';
+  resultEl.style.color = 'var(--ocean)';
+
+  const utter = new SpeechSynthesisUtterance('أهلين! إذا تسمعين هذا الصوت، يعني كل شي شغّال تمام.');
+  if(voice){
+    utter.voice = voice;
+    utter.lang = voice.lang;
+  } else {
+    utter.lang = 'ar-SA';
+  }
+  utter.rate = 0.85;
+  utter.onstart = () => {
+    console.log('[testVoice] onstart', utter.voice?.name);
+    resultEl.textContent = arVoice
+      ? `✅ يشتغل الآن بصوت: ${arVoice.name}`
+      : voice
+        ? `✅ يشتغل بصوت: ${voice.name} (إنجليزي — ما فيه صوت عربي مثبت)`
+        : '✅ يشتغل بصوت افتراضي';
+    resultEl.style.color = 'var(--green)';
+  };
+  utter.onerror = (e) => {
+    console.warn('[testVoice] onerror', e.error);
+    resultEl.textContent = `❌ فيه خطأ بالتشغيل: ${e.error || 'غير معروف'}`;
+    resultEl.style.color = 'var(--coral)';
+  };
+  utter.onend = () => console.log('[testVoice] onend');
+
+  keepSpeechAlive();
+  console.log('[testVoice] before speak()', { voice: utter.voice?.name, lang: utter.lang });
+  window.speechSynthesis.speak(utter);
+  console.log('[testVoice] after speak()', { speaking: window.speechSynthesis.speaking, pending: window.speechSynthesis.pending });
+
+  if(voices.length === 0){
+    waitForVoices(500).then(v2 => {
+      if(v2.length === 0){
+        resultEl.textContent = '❌ ما فيه أي صوت TTS مثبت. على ويندوز: Settings → Time & language → Speech. أو جرّبي Chrome/Edge.';
+        resultEl.style.color = 'var(--coral)';
+      }
+    });
+  }
+}
+
+function toggleNarration(qid){
+  console.log('[toggleNarration] start', qid);
+  if(!('speechSynthesis' in window)){
+    alert('متصفحك ما يدعم الأصوات. جرّبي Chrome أو Edge.');
+    return;
+  }
+
+  if(currentQuestionId === qid && isPlaying){
+    console.log('[toggleNarration] pause/stop same question');
+    stopNarration();
+    return;
+  }
+
+  if(isPlaying){
+    console.log('[toggleNarration] stopping other question first');
+    stopNarration();
+  }
+
+  const voices = getVoices();
+  console.log('[toggleNarration] voices available:', voices.length);
+
+  if(voices.length === 0){
+    setStatus(qid, '⏳ يحمّل الأصوات…');
+    waitForVoices(500).then(v2 => {
+      console.log('[toggleNarration] after waitForVoices:', v2.length);
+      if(v2.length === 0){
+        alert('ما لقينا أي صوت TTS مثبت بالمتصفح. جرّبي Chrome على الكمبيوتر، أو فعّلي صوت النظام من إعدادات Windows.');
+        setStatus(qid, 'اضغطي تشغيل لسماع شرح هذا السؤال');
+      }
+    });
+  }
+
+  startNarration(qid, true);
+}
+
+function startNarration(qid, fromUserGesture){
+  console.log('[startNarration]', qid, 'fromUserGesture=', fromUserGesture);
+  currentQuestionId = qid;
+  isPlaying = true;
+  buildProgressDots(qid, narrations[qid]);
+
+  const btn = document.querySelector(`.voice-bar[data-question="${qid}"] .play-btn`);
+  btn.textContent = '⏸';
+  btn.classList.add('playing');
+  document.querySelector(`.voice-bar[data-question="${qid}"] .stop-btn`).classList.add('show');
+
+  speakStep(qid, 0, !!fromUserGesture);
+}
+
+function stopNarration(){
+  window.speechSynthesis.cancel();
+  if(currentQuestionId){
+    const qid = currentQuestionId;
+    isPlaying = false;
+    clearHighlights();
+    updateProgressDots(qid, -1);
+    setStatus(qid, 'تم الإيقاف. اضغطي تشغيل للبدء من جديد');
+    const btn = document.querySelector(`.voice-bar[data-question="${qid}"] .play-btn`);
+    btn.textContent = '▶';
+    btn.classList.remove('playing');
+    document.querySelector(`.voice-bar[data-question="${qid}"] .stop-btn`).classList.remove('show');
+  }
+  currentQuestionId = null;
+}
+</script>
+
+</body>
+</html>
